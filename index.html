@@ -3,59 +3,105 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Veille enchères Ferrari — 2024-2026</title>
+<meta name="theme-color" content="#18181b" />
+<title>Veille enchères Ferrari — Marché &amp; Garage</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2318181b'/%3E%3Cpath d='M18 46 L32 12 L46 46 M24 34 h16' stroke='%23d40000' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
 <style>
-  :root { font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; color: #1a1a1a; background: #f4f4f5; }
+  :root { --red:#d40000; --ink:#18181b; --zinc:#52525b; --line:#e4e4e7; --bg:#f4f4f5; }
   * { box-sizing: border-box; }
-  body { margin: 0; background: #f4f4f5; }
-  header { background: linear-gradient(135deg, #1b1d22 0%, #2a0a0a 60%, #5a0f0f 100%); color: #fff; padding: 28px 32px 22px; }
-  header h1 { margin: 0 0 6px; font-size: 26px; letter-spacing: .3px; }
-  header h1 .cav { color: #e10600; }
-  header p { margin: 4px 0; color: #cfcfcf; font-size: 13px; max-width: 900px; }
-  main { max-width: 1020px; margin: 0 auto; padding: 20px 16px 60px; }
-  .band { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin: 18px 0 6px; }
-  .band .card { background: #fff; border: 1px solid #e4e4e7; border-radius: 10px; padding: 12px 14px; }
-  .band .card b { display: block; font-size: 13px; margin-bottom: 4px; color: #a30000; }
-  .band .card span { font-size: 12.5px; color: #3f3f46; line-height: 1.45; }
-  section.model { background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; margin: 22px 0; padding: 20px 22px; }
-  section.model h2 { margin: 0 0 2px; font-size: 20px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  section.model h2 .tag { font-size: 11px; font-weight: 600; background: #fdeaea; color: #a30000; border: 1px solid #f3c1c1; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
-  section.model h2 .tag.up { background: #eaf7ee; color: #0c6b2f; border-color: #bfe5cb; }
-  section.model .sub { color: #71717a; font-size: 12.5px; margin: 2px 0 10px; }
-  section.model .lecture { font-size: 13.5px; background: #fafafa; border-left: 3px solid #e10600; padding: 9px 12px; border-radius: 0 8px 8px 0; margin: 10px 0 14px; line-height: 1.5; }
-  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin-top: 10px; }
-  th { text-align: left; background: #1b1d22; color: #fff; padding: 7px 9px; font-weight: 600; }
-  th:first-child { border-radius: 6px 0 0 0; } th:last-child { border-radius: 0 6px 0 0; }
-  td { border-bottom: 1px solid #ececee; padding: 6px 9px; vertical-align: top; }
-  tr:hover td { background: #fdf5f5; }
-  td.num, th.num { text-align: right; white-space: nowrap; }
-  tr.record td { background: #fff7e6; }
-  .unsold { font-size: 12px; color: #52525b; background: #f8f8f8; border: 1px dashed #d4d4d8; border-radius: 8px; padding: 8px 12px; margin-top: 10px; line-height: 1.6; }
-  .unsold b { color: #b45309; }
-  .chartwrap { margin: 8px 0 4px; overflow-x: auto; }
-  .legend { font-size: 11.5px; color: #71717a; margin: 2px 0 0; }
-  .legend .k { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
-  h2.synth { font-size: 20px; margin: 26px 0 4px; }
-  .notes { font-size: 12px; color: #52525b; line-height: 1.65; }
-  .src td a { color: #a30000; text-decoration: none; }
-  .src td a:hover { text-decoration: underline; }
-  footer { text-align: center; color: #a1a1aa; font-size: 11px; padding: 14px; }
-  @media (max-width: 640px) { header h1 { font-size: 20px; } }
+  body { margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color:var(--ink); background:var(--bg); -webkit-font-smoothing: antialiased; }
+  a { color:#a30000; }
+  header { background: radial-gradient(1000px 420px at 85% -12%, rgba(212,0,0,.38), transparent 62%), linear-gradient(160deg,#131316 0%,#1c1c21 55%,#260909 100%); color:#fff; padding:36px 30px 28px; position:relative; }
+  header::after { content:""; position:absolute; left:0; right:0; bottom:0; height:3px; background:linear-gradient(90deg,#d40000,#ff5a3c,#d40000); }
+  .kicker { font-size:11px; letter-spacing:.34em; font-weight:700; color:#ff8a80; text-transform:uppercase; margin:0 0 10px; }
+  header h1 { margin:0 0 6px; font-size:30px; letter-spacing:.2px; }
+  header h1 .cav { color:#ff5a3c; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 4px; }
+  .chip { font-size:11px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.15); color:#ececef; padding:4px 11px; border-radius:20px; }
+  header .meta { font-size:12.5px; color:#c3c3ca; max-width:950px; line-height:1.6; margin:10px 0 0; }
+  header .meta b { color:#fff; }
+  #tabs { position:sticky; top:0; z-index:40; background:rgba(24,24,27,.97); backdrop-filter:blur(6px); display:flex; align-items:center; gap:8px; padding:10px 16px; box-shadow:0 2px 14px rgba(0,0,0,.28); }
+  .navtab { border:1px solid rgba(255,255,255,.16); background:transparent; color:#d4d4d8; font:inherit; font-size:13.5px; font-weight:600; padding:8px 18px; border-radius:24px; cursor:pointer; transition:.18s; }
+  .navtab:hover { color:#fff; border-color:rgba(255,255,255,.4); }
+  .navtab.active { background:var(--red); border-color:var(--red); color:#fff; }
+  #tabs .maj { margin-left:auto; font-size:11.5px; color:#8b8b93; white-space:nowrap; }
+  main { max-width:1060px; margin:0 auto; padding:24px 16px 54px; }
+  .band { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:12px; margin:6px 0 8px; }
+  .band .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:13px 15px; box-shadow:0 1px 3px rgba(0,0,0,.05); border-top:3px solid var(--red); }
+  .band .card b { display:block; font-size:13.5px; margin-bottom:5px; color:#18181b; }
+  .band .card span { font-size:12.5px; color:#3f3f46; line-height:1.5; }
+  section.model { background:#fff; border:1px solid var(--line); border-radius:14px; margin:20px 0; padding:22px 24px; box-shadow:0 1px 4px rgba(0,0,0,.05); }
+  section.model h2 { margin:0 0 2px; font-size:20px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  section.model h2 .tag { font-size:11px; font-weight:600; background:#fdeaea; color:#a30000; border:1px solid #f3c1c1; padding:3px 10px; border-radius:20px; white-space:nowrap; }
+  section.model h2 .tag.up { background:#eaf7ee; color:#0c6b2f; border-color:#bfe5cb; }
+  section.model .sub { color:#71717a; font-size:12.5px; margin:3px 0 10px; }
+  section.model .lecture { font-size:13.5px; background:#fafafa; border-left:3px solid var(--red); padding:10px 13px; border-radius:0 9px 9px 0; margin:10px 0 14px; line-height:1.55; }
+  table { border-collapse:collapse; width:100%; font-size:12.5px; margin-top:12px; background:#fff; }
+  th { text-align:left; background:var(--ink); color:#fff; padding:8px 10px; font-weight:600; }
+  th:first-child { border-radius:8px 0 0 0; } th:last-child { border-radius:0 8px 0 0; }
+  td { border-bottom:1px solid #ececee; padding:7px 10px; vertical-align:top; }
+  tr:nth-child(even) td { background:#fafafa; }
+  tr:hover td { background:#fdf5f5; }
+  td.num, th.num { text-align:right; white-space:nowrap; }
+  tr.record td { background:#fff7e6; }
+  .unsold { font-size:12px; color:var(--zinc); background:#f8f8f8; border:1px dashed #d4d4d8; border-radius:10px; padding:9px 13px; margin-top:12px; line-height:1.65; }
+  .unsold b { color:#b45309; }
+  .chartwrap { margin:8px 0 4px; }
+  .legend { font-size:11.5px; color:#71717a; margin:3px 0 0; line-height:1.55; }
+  .legend .k { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:4px; vertical-align:-1px; }
+  h2.synth { font-size:19px; margin:30px 0 6px; }
+  .notes { font-size:12px; color:var(--zinc); line-height:1.65; }
+  .src td a { color:#a30000; text-decoration:none; } .src td a:hover { text-decoration:underline; }
+  .gintro { background:#fff; border:1px solid var(--line); border-left:4px solid var(--red); border-radius:12px; padding:16px 20px; margin:4px 0 16px; font-size:14px; line-height:1.6; }
+  .gintro b { color:#a30000; }
+  .gform { background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:0 1px 3px rgba(0,0,0,.04); display:grid; grid-template-columns:2.2fr 1fr 1.2fr .8fr auto; gap:12px; align-items:end; }
+  .gform .fld label { font-size:10.5px; font-weight:700; color:var(--zinc); display:block; margin:0 0 5px; text-transform:uppercase; letter-spacing:.07em; }
+  .gform select, .gform input { width:100%; padding:10px 11px; border:1px solid #d4d4d8; border-radius:10px; font:inherit; font-size:14px; background:#fff; color:var(--ink); }
+  .gform select:focus, .gform input:focus { outline:2px solid #f3c1c1; border-color:var(--red); }
+  .btn { background:var(--red); color:#fff; border:none; border-radius:10px; padding:11px 22px; font:inherit; font-weight:700; font-size:14px; cursor:pointer; transition:.15s; }
+  .btn:hover { background:#b30000; }
+  .gempty { background:#fff; border:1px dashed #d4d4d8; border-radius:14px; padding:30px 20px; text-align:center; color:#8b8b93; font-size:13.5px; margin-top:16px; line-height:1.6; }
+  .gcards { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; margin-top:16px; }
+  .gcard { background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px 14px; box-shadow:0 1px 4px rgba(0,0,0,.05); position:relative; border-top:3px solid var(--red); }
+  .gcard h3 { margin:0; font-size:15.5px; padding-right:26px; }
+  .gcard .sub2 { color:#71717a; font-size:12.5px; margin:3px 0 10px; }
+  .gcard .prix { font-size:27px; font-weight:800; color:var(--red); letter-spacing:-.5px; }
+  .gcard .range { font-size:12.5px; color:var(--zinc); margin:2px 0 8px; }
+  .gcard .vs { font-size:12px; color:#71717a; background:#f4f4f5; border-radius:8px; padding:6px 9px; }
+  .gcard .comm { font-size:12.5px; background:#fafafa; border-left:3px solid var(--red); padding:8px 11px; border-radius:0 8px 8px 0; margin-top:10px; line-height:1.55; }
+  .gcard .del { position:absolute; top:10px; right:11px; background:none; border:none; color:#c8c8cd; font-size:17px; cursor:pointer; line-height:1; }
+  .gcard .del:hover { color:var(--red); }
+  details.metho { background:#fff; border:1px dashed #d4d4d8; border-radius:12px; padding:12px 16px; margin-top:18px; font-size:12.5px; color:var(--zinc); line-height:1.65; }
+  details.metho summary { cursor:pointer; font-weight:600; color:var(--ink); }
+  footer { text-align:center; color:#a1a1aa; font-size:11.5px; padding:18px; background:#fff; border-top:1px solid var(--line); }
+  footer a { color:#a30000; }
+  @media (max-width: 760px) {
+    header h1 { font-size:22px; } header { padding:26px 18px 22px; }
+    .gform { grid-template-columns:1fr 1fr; }
+    .gform .fld:first-child { grid-column:1/-1; }
+    .btn { grid-column:1/-1; }
+  }
 </style>
 </head>
 <body>
 <header>
-  <h1>Ferrari <span class="cav">— veille des enchères</span> · 2024 &ndash; 2026</h1>
-  <p>360 Modena Challenge Stradale · F430 Scuderia Spider 16M · 458 Speciale Aperta · 812 Competizione A · Monza SP2 · Daytona SP3 · 12Cilindri Spider</p>
-  <p><b>Période :</b> toutes les ventes aux enchères publiques recensées du 1<sup>er</sup> janvier 2024 au 9 novembre 2026 (CLASSIC.COM, Bring a Trailer, Sports Car Market, pages officielles des maisons, presse spécialisée), avec lieu de vente et prix.</p>
-  <p><b>Monnaie :</b> tous les montants sont convertis en <b>francs suisses (CHF)</b> aux taux moyens de l'année de vente — 2024 : 1 $ = 0,88 · 1 &euro; = 0,96 · 1 £ = 1,13 — 2025 : 1 $ = 0,84 · 1 &euro; = 0,94 · 1 £ = 1,12 — 2026 : taux BNS du 6.11.2026 (1 $ = 0,8185 · 1 &euro; = 0,9144 · 1 £ = 1,0957). Le prix d'origine figure dans chaque ligne.</p>
-  <p><b>Méthode :</b> résultats publiés, prime acheteur incluse pour les maisons traditionnelles (RM Sotheby's, Mecum, Bonhams, Gooding, Broad Arrow, Artcurial…) ; BaT = enchère gagnante hors frais acheteur (~5 %) ; Collecting Cars = prix final affiché.</p>
+  <p class="kicker">Veille enchères &middot; 2024 &ndash; 2026</p>
+  <h1>Ferrari <span class="cav">&mdash; le march&eacute; en direct</span></h1>
+  <div class="chips"><span class="chip">360 Challenge Stradale</span><span class="chip">430 Scuderia Spider 16M</span><span class="chip">458 Speciale Aperta</span><span class="chip">812 Competizione A</span><span class="chip">Monza SP2</span><span class="chip">Daytona SP3</span><span class="chip">12Cilindri Spider</span></div>
+  <p class="meta"><b>P&eacute;riode :</b> toutes les ventes aux ench&egrave;res publiques recens&eacute;es du 1<sup>er</sup> janvier 2024 au 9 novembre 2026 (CLASSIC.COM, Bring a Trailer, Sports Car Market, pages officielles des maisons, presse sp&eacute;cialis&eacute;e), avec lieu de vente et prix.</p>
+  <p class="meta"><b>Monnaie :</b> tous les montants sont convertis en <b>francs suisses (CHF)</b> aux taux moyens de l&rsquo;ann&eacute;e de vente &mdash; 2024 : 1 $ = 0,88 &middot; 1 &euro; = 0,96 &middot; 1 £ = 1,13 &mdash; 2025 : 1 $ = 0,84 &middot; 1 &euro; = 0,94 &middot; 1 £ = 1,12 &mdash; 2026 : taux BNS du 6.11.2026 (1 $ = 0,8185 &middot; 1 &euro; = 0,9144 &middot; 1 £ = 1,0957). Le prix d&rsquo;origine figure dans chaque ligne.</p>
+  <p class="meta"><b>M&eacute;thode :</b> r&eacute;sultats publi&eacute;s, prime acheteur incluse pour les maisons traditionnelles (RM Sotheby&rsquo;s, Mecum, Bonhams, Gooding, Broad Arrow, Artcurial&hellip;) ; BaT = ench&egrave;re gagnante hors frais acheteur (~5 %) ; Collecting Cars = prix final affich&eacute;.</p>
 </header>
+<nav id="tabs">
+  <button class="navtab active" data-tab="marche" onclick="showTab('marche')">📈 March&eacute;</button>
+  <button class="navtab" data-tab="garage" onclick="showTab('garage')">🚗 Mon garage</button>
+  <span class="maj">Mise &agrave; jour : 09/11/2026</span>
+</nav>
 <main>
+<section id="tab-marche" data-tab="marche">
   <div class="band" id="band"></div>
   <div id="models"></div>
-
-  <h2 class="synth">Sources &amp; fiabilité</h2>
+<h2 class="synth">Sources &amp; fiabilité</h2>
   <table class="src">
     <tr><th>Source</th><th>Crédibilité</th><th>Dernière mise à jour</th></tr>
     <tr><td><a href="https://www.snb.ch/fr/the-snb/mandates-goals/statistics/statistics-pub/current_interest_exchange_rates">BNS — cours de change actuels (USD/EUR/GBP → CHF)</a></td><td>5/5</td><td>06.11.2026</td></tr>
@@ -96,11 +142,27 @@
     <tr><td><a href="https://bringatrailer.com/listing/2025-ferrari-12-cilindri/">Bring a Trailer — 12Cilindri (coupé) vendu $536 000 (12/2025)</a></td><td>5/5</td><td>19/12/2025</td></tr>
   </table>
   <p class="notes" style="margin-top:14px"><b>Limites :</b> échantillons faibles pour les modèles rares (0 à 4 ventes/an pour Monza SP2, Daytona SP3 et 812 Competizione A) ; l'état, le kilométrage et la spécification (Tailor Made, one-off, voiture livrée neuve) expliquent une grande partie des écarts — les médianes excluent les one-off pour refléter le marché de série ; les résultats « non officiels » de CLASSIC.COM peuvent différer des chiffres définitifs des maisons ; les ventes BaT s'entendent hors frais acheteur ; les conversions en CHF sont indicatives (taux moyens annuels, taux BNS courant pour 2026). La vente Collecting Cars de nov. 2025 (430 16M) figure deux fois dans les bases avec des dates/prix voisins (07/11, £407 903 / 21/11, &euro;436 430) : très probablement la même voiture — un seul point est retenu. La vente 458 Speciale Aperta de nov. 2024 ($1,05 M, BaT) n'est datée précisément que par la discussion Reddit qui la mentionne.</p>
-</main>
-<footer>Veille enchères Ferrari · générée le 9 novembre 2026 · mises à jour possibles après publication des résultats officiels</footer>
 
+</section>
+<section id="tab-garage" data-tab="garage" style="display:none">
+  <div class="gintro"><b>🚗 Le garage.</b> Ajoute ici chaque voiture (mod&egrave;le, ann&eacute;e, kilom&eacute;trage) : la page calcule sa <b>valeur estim&eacute;e en CHF</b> d&rsquo;apr&egrave;s les ventes aux ench&egrave;res analys&eacute;es dans l&rsquo;onglet March&eacute; &mdash; m&eacute;diane du march&eacute; actuel, ajust&eacute;e du kilom&eacute;trage et de l&rsquo;ann&eacute;e. Les voitures restent enregistr&eacute;es sur cet appareil : rien n&rsquo;est envoy&eacute; ailleurs.</div>
+  <div class="gform">
+    <div class="fld"><label>Mod&egrave;le</label><select id="g-model"></select></div>
+    <div class="fld"><label>Ann&eacute;e</label><input id="g-year" type="number" min="1990" max="2027" value="2005" inputmode="numeric" /></div>
+    <div class="fld"><label>Kilom&eacute;trage</label><input id="g-km" type="text" inputmode="numeric" placeholder="ex. 24 000" /></div>
+    <div class="fld"><label>Unit&eacute;</label><select id="g-unit"><option value="km">km</option><option value="mi">miles</option></select></div>
+    <button class="btn" onclick="garageAdd()">+ Ajouter au garage</button>
+  </div>
+  <div id="garage-cards"></div>
+  <details class="metho">
+    <summary>Comment la valeur est-elle calcul&eacute;e ?</summary>
+    <p>Pour chaque mod&egrave;le, l&rsquo;estimation part de la <b>m&eacute;diane des ventes du dernier semestre couvert</b> (hors one-offs, comme le Daytona SP3 caritatif), c&rsquo;est-&agrave;-dire le niveau r&eacute;el du march&eacute;. Elle applique ensuite l&rsquo;<b>&eacute;lasticit&eacute; prix/kilom&eacute;trage</b> mesur&eacute;e sur les ventes suivies (r&eacute;gression log-log sur les ventes dont le kilom&eacute;trage est connu ; valeur type de &minus;0,12 &agrave; &minus;0,40 selon le mod&egrave;le si l&rsquo;&eacute;chantillon est trop petit), puis un <b>l&eacute;ger facteur d&rsquo;ann&eacute;e</b> (&minus;3 %/an, plafonn&eacute;) pour les mod&egrave;les r&eacute;cents uniquement &mdash; pour les s&eacute;ries limit&eacute;es anciennes, l&rsquo;ann&eacute;e ne p&egrave;se presque rien face au kilom&eacute;trage et &agrave; la sp&eacute;cification.</p>
+    <p>La fourchette affich&eacute;e (&plusmn;15 %) traduit la dispersion r&eacute;elle des ventes. Limites : &eacute;chantillons faibles pour les mod&egrave;les rares (Monza SP2, Daytona SP3, 812 Competizione A) ; aucune 12Cilindri Spider vendue en salle, l&rsquo;estimation repose alors sur les rep&egrave;res du coup&eacute; ; une ench&egrave;re est une tendance de march&eacute;, <b>pas une expertise</b> &mdash; l&rsquo;&eacute;tat, l&rsquo;historique, la couleur et les options font varier le prix.</p>
+  </details>
+</section>
+</main>
+<footer>Mise &agrave; jour : 9 novembre 2026 &middot; automatique les 1<sup>er</sup> et 15 de chaque mois &middot; veille g&eacute;n&eacute;r&eacute;e par <a href="https://github.com/corentinsurand-ai/veille-ferrari">Vibe</a></footer>
 <script>
-"use strict";
 /* ---------- Données : prix d'origine + valeur indicative en CHF (milliers), conversions par année de vente ---------- */
 const M = [
 {
@@ -344,8 +406,139 @@ M.forEach(mo => {
   else cnt = pts.length + " vente"+(pts.length>1?"s":"")+" tracée"+(pts.length>1?"s":"")+(nc?" · "+nc+" à prix non publié (tableau uniquement)":"");
   chart(mo.id, pts, cnt);
 });
-</script>
+/* ---------- Onglets ---------- */
+function showTab(t) {
+  document.querySelectorAll("[data-tab]").forEach(s => { s.style.display = (s.dataset.tab===t) ? "" : "none"; });
+  document.querySelectorAll(".navtab").forEach(b => b.classList.toggle("active", b.dataset.tab===t));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-<footer>Derni&egrave;re mise &agrave; jour : 9 novembre 2026 &middot; mises &agrave; jour automatiques les 1<sup>er</sup> et 15 de chaque mois</footer>
+/* ---------- Garage : valorisation d'apres le marche analyse ---------- */
+const SECS = [["2024-01-01","2024-06-30"],["2024-07-01","2024-12-31"],["2025-01-01","2025-06-30"],["2025-07-01","2025-12-31"],["2026-01-01","2026-06-30"],["2026-07-01","2026-12-31"]];
+const SEC_LABELS = ["S1 2024","S2 2024","S1 2025","S2 2025","S1 2026","S2 2026"];
+const DEF_B = { "360cs":-0.40, "16m":-0.30, "458sa":-0.35, "compa":-0.20, "sp2":-0.15, "sp3":-0.20, "c12":-0.12 };
+const MODERN = { "compa":1, "sp2":1, "sp3":1, "c12":1 };
+
+function med(a){ const v=[...a].sort((x,y)=>x-y); return v.length%2 ? v[(v.length-1)/2] : (v[v.length/2-1]+v[v.length/2])/2; }
+function parseKm(t){
+  if (!t) return null;
+  const m = t.match(/([\d\u00a0\u202f ']+(?:[.,]\d+)?)\s*(km|mi)\b/i);
+  if (!m) return null;
+  const n = parseFloat(m[1].replace(/[\u00a0\u202f ']/g,"").replace(",","."));
+  if (!isFinite(n) || n<=0) return null;
+  return /mi/i.test(m[2]) ? n*1.60934 : n;
+}
+function parseYr(t){
+  if (!t) return null;
+  const m = t.match(/(?:^|[,;(]\s*|\s)((?:19|20)\d{2})\b/);
+  return m ? +m[1] : null;
+}
+function buildVal(mo){
+  const base = (mo.ventes||[]).filter(v=>v.e!=null).map(v=>({e:v.e, xo:v.xo===1, km:parseKm(v.n), yr:parseYr(v.n), d:v.d}));
+  const refs = (mo.ptsRef||[]).map(v=>({e:v.e, xo:false, km:parseKm(v.n), yr:parseYr(v.n), d:v.d, ref:true}));
+  const all = (base.length ? base : refs).filter(p=>!p.xo);
+  const pts = all.filter(p=>p.km!=null);
+  let b = DEF_B[mo.id]||-0.30, nfit = 0, r2 = 0;
+  if (pts.length >= 5) {
+    const xs = pts.map(p=>Math.log(p.km)), ys = pts.map(p=>Math.log(p.e));
+    const mx = xs.reduce((s,v)=>s+v,0)/xs.length, my = ys.reduce((s,v)=>s+v,0)/ys.length;
+    let cov=0, vx=0;
+    for (let i=0;i<xs.length;i++){ cov += (xs[i]-mx)*(ys[i]-my); vx += (xs[i]-mx)**2; }
+    const bf = cov/vx, af = my-bf*mx;
+    let sse=0, sst=0;
+    for (let i=0;i<xs.length;i++){ sse += (ys[i]-(af+bf*xs[i]))**2; sst += (ys[i]-my)**2; }
+    r2 = sst ? 1-sse/sst : 0;
+    if (bf<0 && bf>-1.2 && r2>0.2){ b = bf; nfit = pts.length; }
+  }
+  let A=null, semLab="", kmRef=1000;
+  for (let i=SECS.length-1;i>=0;i--){
+    const inSem = all.filter(p=>p.d>=SECS[i][0] && p.d<=SECS[i][1]);
+    if (!inSem.length) continue;
+    A = med(inSem.map(p=>p.e)); semLab = SEC_LABELS[i];
+    const kk = inSem.filter(p=>p.km!=null).map(p=>p.km);
+    kmRef = kk.length ? med(kk) : (pts.length ? med(pts.map(p=>p.km)) : 1000);
+    break;
+  }
+  if (A==null){ A = all.length ? med(all.map(p=>p.e)) : 0; semLab = "marche"; kmRef = pts.length ? med(pts.map(p=>p.km)) : 1000; }
+  const yrs = all.map(p=>p.yr).filter(y=>y);
+  let modeYr = null;
+  if (yrs.length){ let best=null, bc=0; for (const y of [...new Set(yrs)]){ const c=yrs.filter(v=>v===y).length; if (c>bc){bc=c;best=y;} } modeYr = best; }
+  return { b, nfit, r2, A, semLab, kmRef, n: all.length, modeYr, refOnly: base.length===0 };
+}
+function estimCar(V, km, yr, moId){
+  const est = V.A * Math.pow(km/V.kmRef, V.b);
+  let yf = 1;
+  if (MODERN[moId] && V.modeYr && yr) yf = Math.min(1.12, Math.max(0.86, Math.pow(0.97, V.modeYr-yr)));
+  return est * yf;
+}
+const VAL = {}; M.forEach(mo => { VAL[mo.id] = buildVal(mo); });
+
+/* stockage local (avec repli memoire si indisponible) */
+const GK = "garage-ferrari-v1";
+let G_MEM = null;
+const gLoad = () => { try { return JSON.parse(localStorage.getItem(GK)||"[]") || []; } catch(e){ return G_MEM || []; } };
+const gSave = a => { G_MEM = a; try { localStorage.setItem(GK, JSON.stringify(a)); } catch(e){} };
+
+const fmtKm = v => Math.round(v).toLocaleString("fr-CH") + " km";
+const fmtCHF = k => (Math.round(k)*1000).toLocaleString("fr-CH") + " CHF";
+const pctS = p => (p>=0? "+" : "\u2212") + Math.abs(Math.round(p)) + " %";
+
+function carComment(V, km){
+  const r = km/V.kmRef;
+  if (r<=0.4) return "Kilom\u00e9trage tr\u00e8s en dessous du march\u00e9 suivi : prime notable au-dessus de la m\u00e9diane.";
+  if (r<=0.8) return "Kilom\u00e9trage sous la moyenne du march\u00e9 : l\u00e9g\u00e8rement au-dessus de la m\u00e9diane.";
+  if (r<=1.3) return "Kilom\u00e9trage dans la norme du march\u00e9 suivi : proche de la m\u00e9diane.";
+  return "Kilom\u00e9trage sup\u00e9rieur au march\u00e9 suivi : d\u00e9cote par rapport \u00e0 la m\u00e9diane.";
+}
+
+function renderGarage(){
+  const list = gLoad();
+  const el = document.getElementById("garage-cards");
+  if (!list.length){
+    el.innerHTML = '<div class="gempty">Le garage est vide.<br>Ajoute la premi&egrave;re voiture avec le formulaire ci-dessus<br><span style="font-size:11.5px">(mod&egrave;le, ann&eacute;e, kilom&eacute;trage &mdash; la valeur estim&eacute;e s&rsquo;affiche instantan&eacute;ment)</span></div>';
+    return;
+  }
+  el.innerHTML = list.map(c => {
+    const mo = M.find(m=>m.id===c.m), V = VAL[c.m];
+    const est = estimCar(V, c.km, c.y, c.m);
+    const p = (est/V.A*100 - 100);
+    const small = V.nfit ? "" : (V.n<6 ? " \u00c9chantillon tr\u00e8s r\u00e9duit : estimation indicative." : "");
+    const refNote = V.refOnly ? " Aucune Spider vendue en salle : estimation bas\u00e9e sur les rep\u00e8res du coup\u00e9." : "";
+    return `<div class="gcard">
+      <button class="del" onclick="garageDel('${c.id}')" title="Retirer du garage">\u2715</button>
+      <h3>${mo.nom}</h3>
+      <div class="sub2">${c.y} &middot; ${fmtKm(c.km)}</div>
+      <div class="prix">${fmtCHF(est)}</div>
+      <div class="range">fourchette &asymp; ${fmtCHF(est*0.85)} &ndash; ${fmtCHF(est*1.15)}</div>
+      <div class="vs">March&eacute; ${V.semLab} : m&eacute;diane ${fmtCHF(V.A)} &middot; cette auto : ${pctS(p)} vs m&eacute;diane &middot; base : ${V.n} vente${V.n>1?"s":""}</div>
+      <div class="comm">${carComment(V, c.km)}${small}${refNote}</div>
+    </div>`;
+  }).join("");
+}
+function garageAdd(){
+  const mEl = document.getElementById("g-model");
+  const moId = mEl ? mEl.value : null;
+  const y = parseInt(document.getElementById("g-year").value, 10);
+  const k = parseFloat(String(document.getElementById("g-km").value).replace(/[\u00a0\u202f ']/g,"").replace(",","."));
+  const u = document.getElementById("g-unit").value;
+  if (!moId || !VAL[moId]) return;
+  if (!isFinite(y) || y<1990 || y>2027) return;
+  if (!isFinite(k) || k<=0) return;
+  const km = (u==="mi") ? k*1.60934 : k;
+  const list = gLoad();
+  list.push({ id: Date.now().toString(36) + Math.random().toString(16).slice(2,5), m: moId, y, km });
+  gSave(list); renderGarage();
+  const kEl = document.getElementById("g-km"); if (kEl) kEl.value = "";
+}
+function garageDel(id){ gSave(gLoad().filter(c=>c.id!==id)); renderGarage(); }
+
+/* init */
+(function(){
+  const sel = document.getElementById("g-model");
+  if (sel) sel.innerHTML = M.map(mo=>`<option value="${mo.id}">${mo.nom}</option>`).join("");
+  renderGarage();
+})();
+
+</script>
 </body>
 </html>

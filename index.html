@@ -191,6 +191,7 @@
 
 </section>
 <section id="tab-garage" data-tab="garage" style="display:none">
+  <div id="garage-band"></div>
   <div class="gintro"><b>🚗 Le garage.</b> Ajoute ici chaque voiture (mod&egrave;le, ann&eacute;e, kilom&eacute;trage) : la page calcule sa <b>valeur estim&eacute;e en CHF</b> d&rsquo;apr&egrave;s les ventes aux ench&egrave;res analys&eacute;es dans l&rsquo;onglet March&eacute; &mdash; m&eacute;diane du march&eacute; actuel <b>hors ventes am&eacute;ricaines</b> (les prix US, plus &eacute;lev&eacute;s, faussent les moyennes), ajust&eacute;e du kilom&eacute;trage et de l&rsquo;ann&eacute;e. Le <b>prix d&rsquo;achat</b> (facultatif) affiche la plus ou moins-value en CHF et en % par rapport &agrave; cette valeur du march&eacute;. Clique sur une carte pour replier ses d&eacute;tails (la valeur estim&eacute;e reste visible). Les voitures restent enregistr&eacute;es sur cet appareil. <b>Important :</b> un iPhone finit par effacer les donn&eacute;es d&rsquo;un site peu visit&eacute; &mdash; pense &agrave; cliquer sur <b>&#128279; Sauvegarder mon garage</b> : le lien obtenu contient tes voitures et les restaure d&rsquo;un coup, sur n&rsquo;importe quel appareil.</div>
   <div class="gform">
     <div class="fld"><label>Mod&egrave;le</label><select id="g-model"></select></div>
@@ -585,7 +586,28 @@ function carComment(V, km){
   return "Kilom\u00e9trage sup\u00e9rieur au march\u00e9 suivi : d\u00e9cote par rapport \u00e0 la m\u00e9diane.";
 }
 
+function renderGarageBand(){
+  const el = document.getElementById("garage-band");
+  const list = gLoad();
+  if (!list.length){ el.innerHTML = ""; return; }
+  const ests = list.map(c => ({ c, est: estimCar(VAL[c.m], c.km, c.y, c.m) }));
+  const totEst = ests.reduce((s,x)=>s+x.est, 0);
+  const withPa = ests.filter(x=>x.c.pa);
+  const inv = withPa.reduce((s,x)=>s+x.c.pa, 0);
+  const estPa = withPa.reduce((s,x)=>s+x.est, 0);
+  let g = "";
+  g += `<div class="card"><b>&#128176; Investissement</b><span>${inv ? fmtCHF(inv/1000) + " &middot; " + withPa.length + " voiture" + (withPa.length>1?"s":"") + " avec prix d&rsquo;achat" : "Aucun prix d&rsquo;achat renseign\u00e9 pour l&rsquo;instant"}</span></div>`;
+  g += `<div class="card"><b>&#128202; Valeur estim\u00e9e du garage</b><span>${fmtCHF(totEst)} &middot; ${list.length} voiture${list.length>1?"s":""} (march\u00e9 hors USA)</span></div>`;
+  if (inv && estPa>0){
+    const d = estPa*1000 - inv, pct = d/inv*100;
+    g += `<div class="card"><b>&#128200; ${d>=0?"Plus-value":"Moins-value"}</b><span><b style="display:inline;color:${d>=0?"#0c6b2f":"#a30000"}">${pctS2(pct)} &middot; ${signChf(d)}</b> sur les voitures avec prix d&rsquo;achat</span></div>`;
+  } else {
+    g += `<div class="card"><b>&#128200; Plus-value</b><span>Ajoute des prix d&rsquo;achat pour la calculer</span></div>`;
+  }
+  el.innerHTML = `<div class="band">${g}</div>`;
+}
 function renderGarage(){
+  renderGarageBand();
   const list = gLoad();
   const el = document.getElementById("garage-cards");
   if (!list.length){

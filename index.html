@@ -78,6 +78,14 @@
   .pa-row input { flex:1; min-width:0; padding:7px 10px; border:1px solid #d4d4d8; border-radius:9px; font:inherit; font-size:13px; background:#fff; }
   .pasave { background:var(--ink); color:#fff; border:none; border-radius:9px; padding:7px 14px; font:inherit; font-weight:700; font-size:13px; cursor:pointer; }
   .pasave:hover { background:#000; }
+  .gtool { display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 0; }
+  .btn.alt { background:#fff; color:var(--ink); border:1px solid #d4d4d8; padding:9px 16px; font-size:13px; }
+  .btn.alt:hover { border-color:var(--red); color:var(--red); }
+  #g-restore { background:#fff; border:1px dashed #d4d4d8; border-radius:12px; padding:14px 16px; margin-top:10px; }
+  #g-restore .fld label { font-size:10.5px; font-weight:700; color:var(--zinc); display:block; margin:0 0 5px; text-transform:uppercase; letter-spacing:.07em; }
+  #g-restore input { width:100%; padding:10px 11px; border:1px solid #d4d4d8; border-radius:10px; font:inherit; font-size:14px; background:#fff; color:var(--ink); }
+  .grow { display:flex; align-items:center; gap:12px; margin-top:10px; flex-wrap:wrap; }
+  #g-msg { font-size:12.5px; color:var(--red); font-weight:600; line-height:1.5; }
   details.metho { background:#fff; border:1px dashed #d4d4d8; border-radius:12px; padding:12px 16px; margin-top:18px; font-size:12.5px; color:var(--zinc); line-height:1.65; }
   details.metho summary { cursor:pointer; font-weight:600; color:var(--ink); }
   footer { text-align:center; color:#a1a1aa; font-size:11.5px; padding:18px; background:#fff; border-top:1px solid var(--line); }
@@ -102,6 +110,8 @@
     .gform .fld:first-child { grid-column:1/-1; }
     .gform select, .gform input { font-size:16px; }
     .pa-row input { font-size:16px; }
+    #g-restore input { font-size:16px; }
+    .gtool { margin-top:10px; }
     .btn { grid-column:1/-1; }
     .gcard .prix { font-size:23px; }
     .band { gap:8px; }
@@ -173,7 +183,7 @@
 
 </section>
 <section id="tab-garage" data-tab="garage" style="display:none">
-  <div class="gintro"><b>🚗 Le garage.</b> Ajoute ici chaque voiture (mod&egrave;le, ann&eacute;e, kilom&eacute;trage) : la page calcule sa <b>valeur estim&eacute;e en CHF</b> d&rsquo;apr&egrave;s les ventes aux ench&egrave;res analys&eacute;es dans l&rsquo;onglet March&eacute; &mdash; m&eacute;diane du march&eacute; actuel, ajust&eacute;e du kilom&eacute;trage et de l&rsquo;ann&eacute;e. Le <b>prix d&rsquo;achat</b> (facultatif) affiche la plus ou moins-value en CHF et en % par rapport &agrave; cette valeur du march&eacute;. Les voitures restent enregistr&eacute;es sur cet appareil : rien n&rsquo;est envoy&eacute; ailleurs.</div>
+  <div class="gintro"><b>🚗 Le garage.</b> Ajoute ici chaque voiture (mod&egrave;le, ann&eacute;e, kilom&eacute;trage) : la page calcule sa <b>valeur estim&eacute;e en CHF</b> d&rsquo;apr&egrave;s les ventes aux ench&egrave;res analys&eacute;es dans l&rsquo;onglet March&eacute; &mdash; m&eacute;diane du march&eacute; actuel, ajust&eacute;e du kilom&eacute;trage et de l&rsquo;ann&eacute;e. Le <b>prix d&rsquo;achat</b> (facultatif) affiche la plus ou moins-value en CHF et en % par rapport &agrave; cette valeur du march&eacute;. Les voitures restent enregistr&eacute;es sur cet appareil. <b>Important :</b> un iPhone finit par effacer les donn&eacute;es d&rsquo;un site peu visit&eacute; &mdash; pense &agrave; cliquer sur <b>&#128279; Sauvegarder mon garage</b> : le lien obtenu contient tes voitures et les restaure d&rsquo;un coup, sur n&rsquo;importe quel appareil.</div>
   <div class="gform">
     <div class="fld"><label>Mod&egrave;le</label><select id="g-model"></select></div>
     <div class="fld"><label>Ann&eacute;e</label><input id="g-year" type="number" min="1990" max="2027" value="2005" inputmode="numeric" /></div>
@@ -181,6 +191,14 @@
     <div class="fld"><label>Unit&eacute;</label><select id="g-unit"><option value="km">km</option><option value="mi">miles</option></select></div>
     <div class="fld"><label>Prix d&rsquo;achat (facultatif)</label><input id="g-pa" type="text" inputmode="numeric" placeholder="ex. 250 000" /></div>
     <button class="btn" onclick="garageAdd()">+ Ajouter au garage</button>
+  </div>
+  <div class="gtool">
+    <button class="btn alt" onclick="garageShare()">&#128279; Sauvegarder mon garage</button>
+    <button class="btn alt" onclick="gRestoreToggle()">&#8617;&#65039; Restaurer une sauvegarde</button>
+  </div>
+  <div id="g-restore" style="display:none">
+    <div class="fld"><label>Lien ou code de sauvegarde</label><input id="g-code" type="text" placeholder="Colle ici le lien de sauvegarde re&ccedil;u ou copi&eacute;" /></div>
+    <div class="grow"><button class="btn" onclick="garageRestore()">Restaurer</button><span id="g-msg"></span></div>
   </div>
   <div id="garage-cards"></div>
   <details class="metho">
@@ -507,7 +525,39 @@ const VAL = {}; M.forEach(mo => { VAL[mo.id] = buildVal(mo); });
 const GK = "garage-ferrari-v1";
 let G_MEM = null;
 const gLoad = () => { try { return JSON.parse(localStorage.getItem(GK)||"[]") || []; } catch(e){ return G_MEM || []; } };
-const gSave = a => { G_MEM = a; try { localStorage.setItem(GK, JSON.stringify(a)); } catch(e){} };
+const gSave = a => { G_MEM = a; try { localStorage.setItem(GK, JSON.stringify(a)); } catch(e){} gSyncHash(a); };
+
+/* sauvegarde du garage dans le lien (fragment URL) — resiste a l'effacement du stockage par iOS */
+const gEnc = a => { try { return btoa(unescape(encodeURIComponent(JSON.stringify(a)))); } catch(e){ return ""; } };
+const gDec = s => { try { const a = JSON.parse(decodeURIComponent(escape(atob(String(s))))); if (!Array.isArray(a)) return []; return a.filter(c => c && VAL[c.m] && isFinite(+c.y) && isFinite(+c.km) && +c.km>0).map(c => { const id = String(c.id||"").replace(/[^A-Za-z0-9]/g,""); return { id: id || ("r"+Date.now().toString(36)+Math.random().toString(16).slice(2,5)), m: c.m, y: +c.y, km: +c.km, pa: (isFinite(+c.pa) && +c.pa>0 ? +c.pa : undefined) }; }); } catch(e){ return []; } };
+const gHash = () => { try { const m = location.hash.match(/g=([A-Za-z0-9+/=]+)/); return m ? m[1] : null; } catch(e){ return null; } };
+function gSyncHash(a){ try { history.replaceState(null, "", (a && a.length) ? location.pathname + "#g=" + gEnc(a) : location.pathname); } catch(e){} }
+const gSig = c => c.m + "|" + c.y + "|" + Math.round(c.km);
+function gMerge(loc, rem){ const out = [...loc]; const has = new Set(out.map(gSig)); for (const c of rem){ if (!has.has(gSig(c))){ out.push(c); has.add(gSig(c)); } } return out; }
+function gRestoreToggle(){ const el = document.getElementById("g-restore"); if (el){ el.style.display = (el.style.display==="none" ? "block" : "none"); const c = document.getElementById("g-code"); if (c && el.style.display!=="none") try { c.focus(); } catch(e){} } }
+function garageShare(){
+  const msg = document.getElementById("g-msg");
+  const say = t => { if (msg) msg.textContent = t; };
+  const a = gLoad();
+  if (!a.length){ say("Le garage est vide : ajoute une voiture avant de sauvegarder."); return; }
+  let url = ""; try { url = location.origin + location.pathname + "#g=" + gEnc(a); } catch(e){ say("Impossible de cr\u00e9er le lien ici."); return; }
+  if (typeof navigator !== "undefined" && navigator.share){ navigator.share({ title: "Mon garage Ferrari", url: url }).then(()=>say("Garde le lien partag\u00e9 (favori, note ou message) : il contient ton garage."), ()=>say("Partage annul\u00e9.")); }
+  else if (typeof navigator !== "undefined" && navigator.clipboard && navigator.clipboard.writeText){ const c = document.getElementById("g-code"); navigator.clipboard.writeText(url).then(()=>say("Lien copi\u00e9 \u2714 Garde-le (favori, note ou message) : il contient ton garage."), ()=>{ if (c) c.value = url; say("Copie le lien affich\u00e9 et garde-le pr\u00e9cieusement."); }); }
+  else { const c = document.getElementById("g-code"); if (c) c.value = url; say("Copie le lien affich\u00e9 et garde-le pr\u00e9cieusement."); }
+}
+function garageRestore(){
+  const msg = document.getElementById("g-msg");
+  const say = t => { if (msg) msg.textContent = t; };
+  const el = document.getElementById("g-code");
+  const raw = String(el ? el.value : "").trim();
+  let code = null;
+  const m1 = raw.match(/g=([A-Za-z0-9+/=]+)/); if (m1) code = m1[1];
+  if (!code){ const m2 = raw.match(/[A-Za-z0-9+/=]{20,}/); if (m2) code = m2[0]; }
+  const rem = code ? gDec(code) : [];
+  if (!rem.length){ say("Code non reconnu : colle le lien de sauvegarde complet."); return; }
+  gSave(gMerge(gLoad(), rem)); renderGarage();
+  say(rem.length + " voiture" + (rem.length>1 ? "s" : "") + " restaur\u00e9e" + (rem.length>1 ? "s" : "") + " \u2714");
+}
 
 const fmtKm = v => Math.round(v).toLocaleString("fr-CH") + " km";
 const fmtCHF = k => (Math.round(k)*1000).toLocaleString("fr-CH") + " CHF";
@@ -527,7 +577,7 @@ function renderGarage(){
   const list = gLoad();
   const el = document.getElementById("garage-cards");
   if (!list.length){
-    el.innerHTML = '<div class="gempty">Le garage est vide.<br>Ajoute la premi&egrave;re voiture avec le formulaire ci-dessus<br><span style="font-size:11.5px">(mod&egrave;le, ann&eacute;e, kilom&eacute;trage &mdash; la valeur estim&eacute;e s&rsquo;affiche instantan&eacute;ment)</span></div>';
+    el.innerHTML = '<div class="gempty">Le garage est vide.<br>Ajoute la premi&egrave;re voiture avec le formulaire ci-dessus<br><span style="font-size:11.5px">(mod&egrave;le, ann&eacute;e, kilom&eacute;trage &mdash; la valeur estim&eacute;e s&rsquo;affiche instantan&eacute;ment)</span><br><span style="font-size:11.5px">D&eacute;j&agrave; un garage sauvegard&eacute; ? Utilise &laquo; &crarr;&#65039; Restaurer une sauvegarde &raquo; et colle ton lien</span></div>';
     return;
   }
   el.innerHTML = list.map(c => {
@@ -581,6 +631,8 @@ function garageSetPa(id){
 (function(){
   const sel = document.getElementById("g-model");
   if (sel) sel.innerHTML = M.map(mo=>`<option value="${mo.id}">${mo.nom}</option>`).join("");
+  const h = gHash();
+  if (h){ const rem = gDec(h); if (rem.length){ gSave(gMerge(gLoad(), rem)); } }
   renderGarage();
 })();
 

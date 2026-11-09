@@ -54,7 +54,7 @@
   .src td a { color:#a30000; text-decoration:none; } .src td a:hover { text-decoration:underline; }
   .gintro { background:#fff; border:1px solid var(--line); border-left:4px solid var(--red); border-radius:12px; padding:16px 20px; margin:4px 0 16px; font-size:14px; line-height:1.6; }
   .gintro b { color:#a30000; }
-  .gform { background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:0 1px 3px rgba(0,0,0,.04); display:grid; grid-template-columns:2.2fr 1fr 1.2fr .8fr auto; gap:12px; align-items:end; }
+  .gform { background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:0 1px 3px rgba(0,0,0,.04); display:grid; grid-template-columns:1.9fr .9fr 1.05fr .65fr 1.15fr auto; gap:12px; align-items:end; }
   .gform .fld label { font-size:10.5px; font-weight:700; color:var(--zinc); display:block; margin:0 0 5px; text-transform:uppercase; letter-spacing:.07em; }
   .gform select, .gform input { width:100%; padding:10px 11px; border:1px solid #d4d4d8; border-radius:10px; font:inherit; font-size:14px; background:#fff; color:var(--ink); }
   .gform select:focus, .gform input:focus { outline:2px solid #f3c1c1; border-color:var(--red); }
@@ -71,6 +71,13 @@
   .gcard .comm { font-size:12.5px; background:#fafafa; border-left:3px solid var(--red); padding:8px 11px; border-radius:0 8px 8px 0; margin-top:10px; line-height:1.55; }
   .gcard .del { position:absolute; top:10px; right:11px; background:none; border:none; color:#c8c8cd; font-size:17px; cursor:pointer; line-height:1; }
   .gcard .del:hover { color:var(--red); }
+  .gcard .gain { font-size:13px; font-weight:700; border-radius:9px; padding:7px 11px; margin:2px 0 8px; line-height:1.5; }
+  .gcard .gain.pos { background:#eaf7ee; color:#0c6b2f; }
+  .gcard .gain.neg { background:#fdeaea; color:#a30000; }
+  .pa-row { display:flex; gap:6px; margin-top:11px; }
+  .pa-row input { flex:1; min-width:0; padding:7px 10px; border:1px solid #d4d4d8; border-radius:9px; font:inherit; font-size:13px; background:#fff; }
+  .pasave { background:var(--ink); color:#fff; border:none; border-radius:9px; padding:7px 14px; font:inherit; font-weight:700; font-size:13px; cursor:pointer; }
+  .pasave:hover { background:#000; }
   details.metho { background:#fff; border:1px dashed #d4d4d8; border-radius:12px; padding:12px 16px; margin-top:18px; font-size:12.5px; color:var(--zinc); line-height:1.65; }
   details.metho summary { cursor:pointer; font-weight:600; color:var(--ink); }
   footer { text-align:center; color:#a1a1aa; font-size:11.5px; padding:18px; background:#fff; border-top:1px solid var(--line); }
@@ -94,6 +101,7 @@
     .gform { grid-template-columns:1fr 1fr; padding:14px; gap:10px; }
     .gform .fld:first-child { grid-column:1/-1; }
     .gform select, .gform input { font-size:16px; }
+    .pa-row input { font-size:16px; }
     .btn { grid-column:1/-1; }
     .gcard .prix { font-size:23px; }
     .band { gap:8px; }
@@ -165,12 +173,13 @@
 
 </section>
 <section id="tab-garage" data-tab="garage" style="display:none">
-  <div class="gintro"><b>🚗 Le garage.</b> Ajoute ici chaque voiture (mod&egrave;le, ann&eacute;e, kilom&eacute;trage) : la page calcule sa <b>valeur estim&eacute;e en CHF</b> d&rsquo;apr&egrave;s les ventes aux ench&egrave;res analys&eacute;es dans l&rsquo;onglet March&eacute; &mdash; m&eacute;diane du march&eacute; actuel, ajust&eacute;e du kilom&eacute;trage et de l&rsquo;ann&eacute;e. Les voitures restent enregistr&eacute;es sur cet appareil : rien n&rsquo;est envoy&eacute; ailleurs.</div>
+  <div class="gintro"><b>🚗 Le garage.</b> Ajoute ici chaque voiture (mod&egrave;le, ann&eacute;e, kilom&eacute;trage) : la page calcule sa <b>valeur estim&eacute;e en CHF</b> d&rsquo;apr&egrave;s les ventes aux ench&egrave;res analys&eacute;es dans l&rsquo;onglet March&eacute; &mdash; m&eacute;diane du march&eacute; actuel, ajust&eacute;e du kilom&eacute;trage et de l&rsquo;ann&eacute;e. Le <b>prix d&rsquo;achat</b> (facultatif) affiche la plus ou moins-value en CHF et en % par rapport &agrave; cette valeur du march&eacute;. Les voitures restent enregistr&eacute;es sur cet appareil : rien n&rsquo;est envoy&eacute; ailleurs.</div>
   <div class="gform">
     <div class="fld"><label>Mod&egrave;le</label><select id="g-model"></select></div>
     <div class="fld"><label>Ann&eacute;e</label><input id="g-year" type="number" min="1990" max="2027" value="2005" inputmode="numeric" /></div>
     <div class="fld"><label>Kilom&eacute;trage</label><input id="g-km" type="text" inputmode="numeric" placeholder="ex. 24 000" /></div>
     <div class="fld"><label>Unit&eacute;</label><select id="g-unit"><option value="km">km</option><option value="mi">miles</option></select></div>
+    <div class="fld"><label>Prix d&rsquo;achat (facultatif)</label><input id="g-pa" type="text" inputmode="numeric" placeholder="ex. 250 000" /></div>
     <button class="btn" onclick="garageAdd()">+ Ajouter au garage</button>
   </div>
   <div id="garage-cards"></div>
@@ -503,6 +512,8 @@ const gSave = a => { G_MEM = a; try { localStorage.setItem(GK, JSON.stringify(a)
 const fmtKm = v => Math.round(v).toLocaleString("fr-CH") + " km";
 const fmtCHF = k => (Math.round(k)*1000).toLocaleString("fr-CH") + " CHF";
 const pctS = p => (p>=0? "+" : "\u2212") + Math.abs(Math.round(p)) + " %";
+const pctS2 = p => { const a = Math.abs(p); return (p>=0? "+" : "\u2212") + (a<10 ? a.toFixed(1).replace(".", ",") : String(Math.round(a))) + " %"; };
+const signChf = v => (v>=0? "+ " : "\u2212 ") + Math.abs(Math.round(v/1000)*1000).toLocaleString("fr-CH") + " CHF";
 
 function carComment(V, km){
   const r = km/V.kmRef;
@@ -531,8 +542,10 @@ function renderGarage(){
       <div class="sub2">${c.y} &middot; ${fmtKm(c.km)}</div>
       <div class="prix">${fmtCHF(est)}</div>
       <div class="range">fourchette &asymp; ${fmtCHF(est*0.85)} &ndash; ${fmtCHF(est*1.15)}</div>
+      ${c.pa ? `<div class="gain ${est*1000-c.pa>=0?"pos":"neg"}">${pctS2((est*1000/c.pa-1)*100)} &middot; ${signChf(est*1000-c.pa)} vs achat (${c.pa.toLocaleString("fr-CH")} CHF)</div>` : ""}
       <div class="vs">March&eacute; ${V.semLab} : m&eacute;diane ${fmtCHF(V.A)} &middot; cette auto : ${pctS(p)} vs m&eacute;diane &middot; base : ${V.n} vente${V.n>1?"s":""}</div>
       <div class="comm">${carComment(V, c.km)}${small}${refNote}</div>
+      <div class="pa-row"><input id="pa-${c.id}" type="text" inputmode="numeric" placeholder="Prix d&rsquo;achat en CHF${c.pa?"":" — facultatif"}" value="${c.pa||""}" /><button class="pasave" onclick="garageSetPa('${c.id}')" title="Enregistrer le prix d&rsquo;achat">\u2713</button></div>
     </div>`;
   }).join("");
 }
@@ -545,13 +558,24 @@ function garageAdd(){
   if (!moId || !VAL[moId]) return;
   if (!isFinite(y) || y<1990 || y>2027) return;
   if (!isFinite(k) || k<=0) return;
+  const pa = parseFloat(String(document.getElementById("g-pa").value).replace(/[\u00a0\u202f ']/g,"").replace(",","."));
   const km = (u==="mi") ? k*1.60934 : k;
   const list = gLoad();
-  list.push({ id: Date.now().toString(36) + Math.random().toString(16).slice(2,5), m: moId, y, km });
+  list.push({ id: Date.now().toString(36) + Math.random().toString(16).slice(2,5), m: moId, y, km, pa: (isFinite(pa) && pa>0 ? pa : undefined) });
   gSave(list); renderGarage();
   const kEl = document.getElementById("g-km"); if (kEl) kEl.value = "";
+  const pEl = document.getElementById("g-pa"); if (pEl) pEl.value = "";
 }
 function garageDel(id){ gSave(gLoad().filter(c=>c.id!==id)); renderGarage(); }
+function garageSetPa(id){
+  const el = document.getElementById("pa-"+id);
+  const raw = String(el ? el.value : "").replace(/[\u00a0\u202f ']/g,"").replace(",",".");
+  const pa = parseFloat(raw);
+  const list = gLoad(); const c = list.find(x=>x.id===id);
+  if (!c) return;
+  c.pa = (isFinite(pa) && pa>0) ? pa : undefined;
+  gSave(list); renderGarage();
+}
 
 /* init */
 (function(){

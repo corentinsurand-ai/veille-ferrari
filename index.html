@@ -75,12 +75,31 @@
   details.metho summary { cursor:pointer; font-weight:600; color:var(--ink); }
   footer { text-align:center; color:#a1a1aa; font-size:11.5px; padding:18px; background:#fff; border-top:1px solid var(--line); }
   footer a { color:#a30000; }
+  .tscroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .tscroll table { min-width:620px; margin-top:12px; }
   @media (max-width: 760px) {
-    header h1 { font-size:22px; } header { padding:26px 18px 22px; }
-    .gform { grid-template-columns:1fr 1fr; }
+    header { padding:24px 16px 20px; } header h1 { font-size:21px; }
+    .kicker { letter-spacing:.22em; font-size:10px; }
+    .chip { font-size:10.5px; padding:3px 9px; }
+    header .meta { font-size:11.5px; line-height:1.55; }
+    #tabs { padding:8px 10px; gap:6px; }
+    .navtab { font-size:12.5px; padding:7px 13px; }
+    #tabs .maj { font-size:10px; }
+    main { padding:14px 10px 40px; }
+    section.model { padding:16px 14px; border-radius:12px; }
+    section.model h2 { font-size:17px; }
+    section.model .lecture { font-size:13px; }
+    .legend { font-size:12px; }
+    table { font-size:12px; }
+    .gform { grid-template-columns:1fr 1fr; padding:14px; gap:10px; }
     .gform .fld:first-child { grid-column:1/-1; }
+    .gform select, .gform input { font-size:16px; }
     .btn { grid-column:1/-1; }
+    .gcard .prix { font-size:23px; }
+    .band { gap:8px; }
+    .band .card { padding:11px 12px; }
   }
+  @media (max-width: 430px) { #tabs .maj { display:none; } }
 </style>
 </head>
 <body>
@@ -102,6 +121,7 @@
   <div class="band" id="band"></div>
   <div id="models"></div>
 <h2 class="synth">Sources &amp; fiabilité</h2>
+  <div class="tscroll">
   <table class="src">
     <tr><th>Source</th><th>Crédibilité</th><th>Dernière mise à jour</th></tr>
     <tr><td><a href="https://www.snb.ch/fr/the-snb/mandates-goals/statistics/statistics-pub/current_interest_exchange_rates">BNS — cours de change actuels (USD/EUR/GBP → CHF)</a></td><td>5/5</td><td>06.11.2026</td></tr>
@@ -140,7 +160,7 @@
     <tr><td><a href="https://www.broadarrowauctions.com/vehicles/am26_r0149/2004-ferrari-360-challenge-stradale">Broad Arrow — lot 121 Amelia Auction 2026</a></td><td>5/5</td><td>06/03/2026</td></tr>
     <tr><td><a href="https://rmsothebys.com/media-center/press-releases/rm-sotheby-s-achieves-10-million-in-tegernsee-with-91-of-all-lots-sold/">RM Sotheby's — communiqué vente de Tegernsee 2026</a></td><td>5/5</td><td>04/07/2026</td></tr>
     <tr><td><a href="https://bringatrailer.com/listing/2025-ferrari-12-cilindri/">Bring a Trailer — 12Cilindri (coupé) vendu $536 000 (12/2025)</a></td><td>5/5</td><td>19/12/2025</td></tr>
-  </table>
+  </table></div>
   <p class="notes" style="margin-top:14px"><b>Limites :</b> échantillons faibles pour les modèles rares (0 à 4 ventes/an pour Monza SP2, Daytona SP3 et 812 Competizione A) ; l'état, le kilométrage et la spécification (Tailor Made, one-off, voiture livrée neuve) expliquent une grande partie des écarts — les médianes excluent les one-off pour refléter le marché de série ; les résultats « non officiels » de CLASSIC.COM peuvent différer des chiffres définitifs des maisons ; les ventes BaT s'entendent hors frais acheteur ; les conversions en CHF sont indicatives (taux moyens annuels, taux BNS courant pour 2026). La vente Collecting Cars de nov. 2025 (430 16M) figure deux fois dans les bases avec des dates/prix voisins (07/11, £407 903 / 21/11, &euro;436 430) : très probablement la même voiture — un seul point est retenu. La vente 458 Speciale Aperta de nov. 2024 ($1,05 M, BaT) n'est datée précisément que par la discussion Reddit qui la mentionne.</p>
 
 </section>
@@ -318,7 +338,8 @@ document.getElementById("band").innerHTML = bandData.map(b =>
 
 /* Graphique SVG */
 function chart(id, pts, cnt) {
-  const W=760, H=320, L=82, R=26, T=28, B=48;
+  const MOB = (typeof window !== "undefined" && window.innerWidth) ? window.innerWidth < 640 : false;
+  const W = MOB ? 620 : 760, H = MOB ? 400 : 320, L = MOB ? 66 : 82, R = MOB ? 16 : 26, T = MOB ? 32 : 28, B = MOB ? 56 : 48;
   const el = document.getElementById("ch-"+id);
   if (!pts.length) { el.innerHTML = "<p class='legend'>Pas de vente aux enchères publique pour ce modèle sur la période.</p>"; return; }
   const t0 = Date.parse("2024-01-01"), t1 = Date.parse("2026-12-31");
@@ -391,9 +412,9 @@ cont.innerHTML = M.map(mo => `
   <div class="chartwrap"><div id="ch-${mo.id}"></div></div>
   <p class="legend"><span class="k" style="background:#d40000"></span> vente aux enchères &nbsp;&nbsp;<span class="k" style="background:#fff;border:2px solid #d97706"></span> non vendue (enchère max) &nbsp;&nbsp;<span style="color:#2563eb;font-weight:700">— —</span> médiane semestrielle (niveau du marché, hors one-offs) &nbsp;&nbsp;<span style="color:#b45309;font-weight:700">★</span> record du modèle${mo.id==="c12"?" &nbsp;&nbsp;· points = indicateur <i>coupé</i> (aucune Spider vendue en salle)":""}</p>
   <p class="legend" style="margin-bottom:2px">La ligne rouge pointillée relie simplement les ventes dans l'ordre chronologique : chaque point est une <b>voiture différente</b> (kilométrage, état, spécification). La ligne bleue en pointillés longs = <b>médiane des ventes du semestre</b>, c'est-à-dire le niveau réel du marché, indépendamment des records. L'axe des prix est <b>calé sur chaque modèle</b> (échelle logarithmique) : une même hauteur verticale = une même évolution en pourcentage, donc les records n'écrasent plus le marché au bas du graphique.</p>
-  ${mo.ventes.length ? `<table><tr><th>Date</th><th>Lieu de la vente</th><th>Maison / vente</th><th>Prix</th><th class="num">≈ CHF</th></tr>
+  ${mo.ventes.length ? `<div class="tscroll"><table><tr><th>Date</th><th>Lieu de la vente</th><th>Maison / vente</th><th>Prix</th><th class="num">≈ CHF</th></tr>
    ${mo.ventes.map(v=>`<tr${v.rec?" class='record'":""}><td>${fmtDate(v.d)}</td><td>${v.l}</td><td>${v.m}</td><td><b>${v.p}</b>${v.n?`<br><span style="color:#8b8b93;font-size:11.5px">${v.n}</span>`:""}</td><td class="num">${v.e==null?"n.c.":S(v.e)}</td></tr>`).join("")}
-  </table>` : ""}
+  </table></div>` : ""}
   ${mo.non&&mo.non.length?`<div class="unsold"><b>Non vendues &amp; repères :</b> ${mo.non.join(" · ")}</div>`:""}
  </section>`).join("");
 

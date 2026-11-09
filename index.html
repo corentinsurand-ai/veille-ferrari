@@ -134,6 +134,7 @@
   <h1>Ferrari <span class="cav">&mdash; le march&eacute; en direct</span></h1>
   <div class="chips"><span class="chip">360 Challenge Stradale</span><span class="chip">430 Scuderia Spider 16M</span><span class="chip">458 Speciale Aperta</span><span class="chip">812 Competizione A</span><span class="chip">Monza SP2</span><span class="chip">Daytona SP3</span><span class="chip">12Cilindri Spider</span></div>
   <p class="meta"><b>P&eacute;riode :</b> toutes les ventes aux ench&egrave;res publiques recens&eacute;es du 1<sup>er</sup> janvier 2024 au 9 novembre 2026 (CLASSIC.COM, Bring a Trailer, Sports Car Market, pages officielles des maisons, presse sp&eacute;cialis&eacute;e), avec lieu de vente et prix.</p>
+  <p class="meta"><b>P&eacute;rim&egrave;tre :</b> les ventes aux &Eacute;tats-Unis sont exclues des graphiques, tableaux et estimations &mdash; le march&eacute; am&eacute;ricain, nettement plus tendu, fausse les moyennes. Les records am&eacute;ricains restent cit&eacute;s dans les commentaires de lecture.</p>
   <p class="meta"><b>Monnaie :</b> tous les montants sont convertis en <b>francs suisses (CHF)</b> aux taux moyens de l&rsquo;ann&eacute;e de vente &mdash; 2024 : 1 $ = 0,88 &middot; 1 &euro; = 0,96 &middot; 1 £ = 1,13 &mdash; 2025 : 1 $ = 0,84 &middot; 1 &euro; = 0,94 &middot; 1 £ = 1,12 &mdash; 2026 : taux BNS du 6.11.2026 (1 $ = 0,8185 &middot; 1 &euro; = 0,9144 &middot; 1 £ = 1,0957). Le prix d&rsquo;origine figure dans chaque ligne.</p>
   <p class="meta"><b>M&eacute;thode :</b> r&eacute;sultats publi&eacute;s, prime acheteur incluse pour les maisons traditionnelles (RM Sotheby&rsquo;s, Mecum, Bonhams, Gooding, Broad Arrow, Artcurial&hellip;) ; BaT = ench&egrave;re gagnante hors frais acheteur (~5 %) ; Collecting Cars = prix final affich&eacute;.</p>
 </header>
@@ -356,6 +357,15 @@ const M = [
 }
 ];
 
+/* ventes aux USA exclues de l'affichage (graphes, tableaux) et du calcul garage : march\u00e9 US nettement plus tendu, qui fausse les moyennes */
+const isUS = v => /USA|Am[eé]rique|Californie|Chicago|État de New York|État de Washington/.test(v.l||"");
+const displayData = mo => {
+  const ventes = (mo.ventes||[]).filter(v=>!isUS(v));
+  const refs = (mo.ptsRef||[]).filter(v=>!isUS(v));
+  if (!ventes.length && !refs.length) return { ventes: mo.ventes||[], refs: mo.ptsRef||[], usOnly: true };
+  return { ventes, refs, usOnly: false };
+};
+
 /* ---------- Rendu ---------- */
 const fmtDate = iso => { const [y,m,d] = iso.split("-"); return d+"/"+m+"/"+y; };
 const S = k => (k*1000).toLocaleString("fr-CH") + " CHF";
@@ -440,26 +450,28 @@ function chart(id, pts, cnt) {
 
 /* Sections */
 const cont = document.getElementById("models");
-cont.innerHTML = M.map(mo => `
+cont.innerHTML = M.map(mo => { const d = displayData(mo); return `
  <section class="model" id="${mo.id}">
   <h2>${mo.nom} <span class="tag ${mo.up.startsWith("×")||mo.up.startsWith("+")?"up":""}">${mo.up}</span></h2>
   <p class="sub">${mo.serie}</p>
   <div class="lecture">${mo.lecture}</div>
   <div class="chartwrap"><div id="ch-${mo.id}"></div></div>
+  ${d.usOnly ? `<p class="legend" style="font-weight:600;color:#b45309">&#9888;&#65039; Aucune vente hors USA pour ce mod&egrave;le : points et rep&egrave;res am&eacute;ricains affich&eacute;s &agrave; titre indicatif.</p>` : ""}
   <p class="legend"><span class="k" style="background:#d40000"></span> vente aux enchères &nbsp;&nbsp;<span class="k" style="background:#fff;border:2px solid #d97706"></span> non vendue (enchère max) &nbsp;&nbsp;<span style="color:#2563eb;font-weight:700">— —</span> médiane semestrielle (niveau du marché, hors one-offs) &nbsp;&nbsp;<span style="color:#b45309;font-weight:700">★</span> record du modèle${mo.id==="c12"?" &nbsp;&nbsp;· points = indicateur <i>coupé</i> (aucune Spider vendue en salle)":""}</p>
   <p class="legend" style="margin-bottom:2px">La ligne rouge pointillée relie simplement les ventes dans l'ordre chronologique : chaque point est une <b>voiture différente</b> (kilométrage, état, spécification). La ligne bleue en pointillés longs = <b>médiane des ventes du semestre</b>, c'est-à-dire le niveau réel du marché, indépendamment des records. L'axe des prix est <b>calé sur chaque modèle</b> (échelle logarithmique) : une même hauteur verticale = une même évolution en pourcentage, donc les records n'écrasent plus le marché au bas du graphique.</p>
-  ${mo.ventes.length ? `<div class="tscroll"><table><tr><th>Date</th><th>Lieu de la vente</th><th>Maison / vente</th><th>Prix</th><th class="num">≈ CHF</th></tr>
-   ${mo.ventes.map(v=>`<tr${v.rec?" class='record'":""}><td>${fmtDate(v.d)}</td><td>${v.l}</td><td>${v.m}</td><td><b>${v.p}</b>${v.n?`<br><span style="color:#8b8b93;font-size:11.5px">${v.n}</span>`:""}</td><td class="num">${v.e==null?"n.c.":S(v.e)}</td></tr>`).join("")}
+  ${d.ventes.length ? `<div class="tscroll"><table><tr><th>Date</th><th>Lieu de la vente</th><th>Maison / vente</th><th>Prix</th><th class="num">≈ CHF</th></tr>
+   ${d.ventes.map(v=>`<tr${v.rec?" class='record'":""}><td>${fmtDate(v.d)}</td><td>${v.l}</td><td>${v.m}</td><td><b>${v.p}</b>${v.n?`<br><span style="color:#8b8b93;font-size:11.5px">${v.n}</span>`:""}</td><td class="num">${v.e==null?"n.c.":S(v.e)}</td></tr>`).join("")}
   </table></div>` : ""}
   ${mo.non&&mo.non.length?`<div class="unsold"><b>Non vendues &amp; repères :</b> ${mo.non.join(" · ")}</div>`:""}
- </section>`).join("");
+ </section>`; }).join("");
 
 M.forEach(mo => {
-  const pts = mo.ventes.filter(v=>v.e!=null).map(v=>({...v, sold:1}))
-    .concat((mo.ptsRef||[]).map(v=>({...v})));
-  const nc = mo.ventes.filter(v=>v.e==null).length;
+  const d = displayData(mo);
+  const pts = d.ventes.filter(v=>v.e!=null).map(v=>({...v, sold:1}))
+    .concat(d.refs.map(v=>({...v})));
+  const nc = d.ventes.filter(v=>v.e==null).length;
   let cnt;
-  if (!mo.ventes.length) cnt = pts.length + " point"+(pts.length>1?"s":"")+" indicateur (coupé) — aucune Spider vendue en salle";
+  if (!mo.ventes.length) cnt = pts.length + " point"+(pts.length>1?"s":"")+" indicateur (coupé)"+(d.usOnly?" — aucune vente hors USA, repères américains":"")+" — aucune Spider vendue en salle";
   else cnt = pts.length + " vente"+(pts.length>1?"s":"")+" tracée"+(pts.length>1?"s":"")+(nc?" · "+nc+" à prix non publié (tableau uniquement)":"");
   chart(mo.id, pts, cnt);
 });
@@ -490,8 +502,6 @@ function parseYr(t){
   const m = t.match(/(?:^|[,;(]\s*|\s)((?:19|20)\d{2})\b/);
   return m ? +m[1] : null;
 }
-/* ventes aux USA exclues du calcul : march\u00e9 US nettement plus tendu, qui fausse les moyennes */
-const isUS = v => /USA|Am[eé]rique|Californie|Chicago|État de New York|État de Washington/.test(v.l||"");
 function buildVal(mo){
   const refs = (mo.ptsRef||[]).map(v=>({e:v.e, xo:false, km:parseKm(v.n), yr:parseYr(v.n), d:v.d, ref:true}));
   let base = (mo.ventes||[]).filter(v=>v.e!=null && !isUS(v)).map(v=>({e:v.e, xo:v.xo===1, km:parseKm(v.n), yr:parseYr(v.n), d:v.d}));

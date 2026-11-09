@@ -191,7 +191,7 @@
 
 </section>
 <section id="tab-garage" data-tab="garage" style="display:none">
-  <div class="gintro"><b>🚗 Le garage.</b> Ajoute ici chaque voiture (mod&egrave;le, ann&eacute;e, kilom&eacute;trage) : la page calcule sa <b>valeur estim&eacute;e en CHF</b> d&rsquo;apr&egrave;s les ventes aux ench&egrave;res analys&eacute;es dans l&rsquo;onglet March&eacute; &mdash; m&eacute;diane du march&eacute; actuel, ajust&eacute;e du kilom&eacute;trage et de l&rsquo;ann&eacute;e. Le <b>prix d&rsquo;achat</b> (facultatif) affiche la plus ou moins-value en CHF et en % par rapport &agrave; cette valeur du march&eacute;. Clique sur une carte pour replier ses d&eacute;tails (la valeur estim&eacute;e reste visible). Les voitures restent enregistr&eacute;es sur cet appareil. <b>Important :</b> un iPhone finit par effacer les donn&eacute;es d&rsquo;un site peu visit&eacute; &mdash; pense &agrave; cliquer sur <b>&#128279; Sauvegarder mon garage</b> : le lien obtenu contient tes voitures et les restaure d&rsquo;un coup, sur n&rsquo;importe quel appareil.</div>
+  <div class="gintro"><b>🚗 Le garage.</b> Ajoute ici chaque voiture (mod&egrave;le, ann&eacute;e, kilom&eacute;trage) : la page calcule sa <b>valeur estim&eacute;e en CHF</b> d&rsquo;apr&egrave;s les ventes aux ench&egrave;res analys&eacute;es dans l&rsquo;onglet March&eacute; &mdash; m&eacute;diane du march&eacute; actuel <b>hors ventes am&eacute;ricaines</b> (les prix US, plus &eacute;lev&eacute;s, faussent les moyennes), ajust&eacute;e du kilom&eacute;trage et de l&rsquo;ann&eacute;e. Le <b>prix d&rsquo;achat</b> (facultatif) affiche la plus ou moins-value en CHF et en % par rapport &agrave; cette valeur du march&eacute;. Clique sur une carte pour replier ses d&eacute;tails (la valeur estim&eacute;e reste visible). Les voitures restent enregistr&eacute;es sur cet appareil. <b>Important :</b> un iPhone finit par effacer les donn&eacute;es d&rsquo;un site peu visit&eacute; &mdash; pense &agrave; cliquer sur <b>&#128279; Sauvegarder mon garage</b> : le lien obtenu contient tes voitures et les restaure d&rsquo;un coup, sur n&rsquo;importe quel appareil.</div>
   <div class="gform">
     <div class="fld"><label>Mod&egrave;le</label><select id="g-model"></select></div>
     <div class="fld"><label>Ann&eacute;e</label><input id="g-year" type="number" min="1990" max="2027" value="2005" inputmode="numeric" /></div>
@@ -211,8 +211,8 @@
   <div id="garage-cards"></div>
   <details class="metho">
     <summary>Comment la valeur est-elle calcul&eacute;e ?</summary>
-    <p>Pour chaque mod&egrave;le, l&rsquo;estimation part de la <b>m&eacute;diane des ventes du dernier semestre couvert</b> (hors one-offs, comme le Daytona SP3 caritatif), c&rsquo;est-&agrave;-dire le niveau r&eacute;el du march&eacute;. Elle applique ensuite l&rsquo;<b>&eacute;lasticit&eacute; prix/kilom&eacute;trage</b> mesur&eacute;e sur les ventes suivies (r&eacute;gression log-log sur les ventes dont le kilom&eacute;trage est connu ; valeur type de &minus;0,12 &agrave; &minus;0,40 selon le mod&egrave;le si l&rsquo;&eacute;chantillon est trop petit), puis un <b>l&eacute;ger facteur d&rsquo;ann&eacute;e</b> (&minus;3 %/an, plafonn&eacute;) pour les mod&egrave;les r&eacute;cents uniquement &mdash; pour les s&eacute;ries limit&eacute;es anciennes, l&rsquo;ann&eacute;e ne p&egrave;se presque rien face au kilom&eacute;trage et &agrave; la sp&eacute;cification.</p>
-    <p>La fourchette affich&eacute;e (&plusmn;15 %) traduit la dispersion r&eacute;elle des ventes. Limites : &eacute;chantillons faibles pour les mod&egrave;les rares (Monza SP2, Daytona SP3, 812 Competizione A) ; aucune 12Cilindri Spider vendue en salle, l&rsquo;estimation repose alors sur les rep&egrave;res du coup&eacute; ; une ench&egrave;re est une tendance de march&eacute;, <b>pas une expertise</b> &mdash; l&rsquo;&eacute;tat, l&rsquo;historique, la couleur et les options font varier le prix.</p>
+    <p>Pour chaque mod&egrave;le, l&rsquo;estimation part de la <b>m&eacute;diane des ventes du dernier semestre couvert</b> (hors one-offs, comme le Daytona SP3 caritatif, <b>et hors ventes aux &Eacute;tats-Unis</b> &mdash; march&eacute; US nettement plus tendu, qui tire les moyennes vers le haut), c&rsquo;est-&agrave;-dire le niveau r&eacute;el du march&eacute; europ&eacute;en. Elle applique ensuite l&rsquo;<b>&eacute;lasticit&eacute; prix/kilom&eacute;trage</b> mesur&eacute;e sur les ventes suivies (r&eacute;gression log-log sur les ventes hors USA dont le kilom&eacute;trage est connu ; valeur type de &minus;0,12 &agrave; &minus;0,40 selon le mod&egrave;le si l&rsquo;&eacute;chantillon est trop petit), puis un <b>l&eacute;ger facteur d&rsquo;ann&eacute;e</b> (&minus;3 %/an, plafonn&eacute;) pour les mod&egrave;les r&eacute;cents uniquement &mdash; pour les s&eacute;ries limit&eacute;es anciennes, l&rsquo;ann&eacute;e ne p&egrave;se presque rien face au kilom&eacute;trage et &agrave; la sp&eacute;cification.</p>
+    <p>La fourchette affich&eacute;e (&plusmn;15 %) traduit la dispersion r&eacute;elle des ventes. Limites : &eacute;chantillons faibles pour les mod&egrave;les rares (Monza SP2, Daytona SP3, 812 Competizione A) ; aucune 12Cilindri Spider vendue en salle, l&rsquo;estimation repose alors sur les rep&egrave;res am&eacute;ricains du coup&eacute; (aucune vente hors USA disponible) ; une ench&egrave;re est une tendance de march&eacute;, <b>pas une expertise</b> &mdash; l&rsquo;&eacute;tat, l&rsquo;historique, la couleur et les options font varier le prix.</p>
   </details>
 </section>
 </main>
@@ -489,9 +489,13 @@ function parseYr(t){
   const m = t.match(/(?:^|[,;(]\s*|\s)((?:19|20)\d{2})\b/);
   return m ? +m[1] : null;
 }
+/* ventes aux USA exclues du calcul : march\u00e9 US nettement plus tendu, qui fausse les moyennes */
+const isUS = v => /USA|Am[eé]rique|Californie|Chicago|État de New York|État de Washington/.test(v.l||"");
 function buildVal(mo){
-  const base = (mo.ventes||[]).filter(v=>v.e!=null).map(v=>({e:v.e, xo:v.xo===1, km:parseKm(v.n), yr:parseYr(v.n), d:v.d}));
   const refs = (mo.ptsRef||[]).map(v=>({e:v.e, xo:false, km:parseKm(v.n), yr:parseYr(v.n), d:v.d, ref:true}));
+  let base = (mo.ventes||[]).filter(v=>v.e!=null && !isUS(v)).map(v=>({e:v.e, xo:v.xo===1, km:parseKm(v.n), yr:parseYr(v.n), d:v.d}));
+  let usOnly = false;
+  if (!base.length){ usOnly = true; base = (mo.ventes||[]).filter(v=>v.e!=null).map(v=>({e:v.e, xo:v.xo===1, km:parseKm(v.n), yr:parseYr(v.n), d:v.d})); }
   const all = (base.length ? base : refs).filter(p=>!p.xo);
   const pts = all.filter(p=>p.km!=null);
   let b = DEF_B[mo.id]||-0.30, nfit = 0, r2 = 0;
@@ -519,7 +523,7 @@ function buildVal(mo){
   const yrs = all.map(p=>p.yr).filter(y=>y);
   let modeYr = null;
   if (yrs.length){ let best=null, bc=0; for (const y of [...new Set(yrs)]){ const c=yrs.filter(v=>v===y).length; if (c>bc){bc=c;best=y;} } modeYr = best; }
-  return { b, nfit, r2, A, semLab, kmRef, n: all.length, modeYr, refOnly: base.length===0 };
+  return { b, nfit, r2, A, semLab, kmRef, n: all.length, modeYr, refOnly: base.length===0 && !(mo.ventes||[]).length, usOnly };
 }
 function estimCar(V, km, yr, moId){
   const est = V.A * Math.pow(km/V.kmRef, V.b);
@@ -604,8 +608,8 @@ function renderGarage(){
       <div class="gbody">
       <div class="range">fourchette &asymp; ${fmtCHF(est*0.85)} &ndash; ${fmtCHF(est*1.15)}</div>
       ${c.pa ? `<div class="gain ${est*1000-c.pa>=0?"pos":"neg"}">${pctS2((est*1000/c.pa-1)*100)} &middot; ${signChf(est*1000-c.pa)} vs achat (${c.pa.toLocaleString("fr-CH")} CHF)</div>` : ""}
-      <div class="vs">March&eacute; ${V.semLab} : m&eacute;diane ${fmtCHF(V.A)} &middot; cette auto : ${pctS(p)} vs m&eacute;diane &middot; base : ${V.n} vente${V.n>1?"s":""}</div>
-      <div class="comm">${carComment(V, c.km)}${small}${refNote}</div>
+      <div class="vs">March&eacute; ${V.semLab}${V.usOnly ? " (base am\u00e9ricaine)" : " hors USA"} : m&eacute;diane ${fmtCHF(V.A)} &middot; cette auto : ${pctS(p)} vs m&eacute;diane &middot; base : ${V.n} vente${V.n>1?"s":""}</div>
+      <div class="comm">${carComment(V, c.km)}${small}${refNote}${V.usOnly ? " Aucune vente hors USA pour ce mod\u00e8le : base am\u00e9ricaine, estimation indicative." : ""}</div>
       <div class="pa-row"><input id="pa-${c.id}" type="text" inputmode="numeric" placeholder="Prix d&rsquo;achat en CHF${c.pa?"":" — facultatif"}" value="${c.pa||""}" /><button class="pasave" onclick="garageSetPa('${c.id}')" title="Enregistrer le prix d&rsquo;achat">\u2713</button></div>
       </div>
     </div>`;

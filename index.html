@@ -408,7 +408,7 @@ M.forEach(mo => {
 });
 /* ---------- Onglets ---------- */
 function showTab(t) {
-  document.querySelectorAll("[data-tab]").forEach(s => { s.style.display = (s.dataset.tab===t) ? "" : "none"; });
+  document.querySelectorAll("section[data-tab]").forEach(s => { s.style.display = (s.dataset.tab===t) ? "" : "none"; });
   document.querySelectorAll(".navtab").forEach(b => b.classList.toggle("active", b.dataset.tab===t));
   window.scrollTo({ top: 0, behavior: "smooth" });
 }

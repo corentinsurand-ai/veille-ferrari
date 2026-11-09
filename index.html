@@ -74,6 +74,14 @@
   .gcard .gain { font-size:13px; font-weight:700; border-radius:9px; padding:7px 11px; margin:2px 0 8px; line-height:1.5; }
   .gcard .gain.pos { background:#eaf7ee; color:#0c6b2f; }
   .gcard .gain.neg { background:#fdeaea; color:#a30000; }
+  .gcard .ghead { cursor:pointer; -webkit-user-select:none; user-select:none; }
+  .gcard .pxrow { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .gcard .foldbtn { background:none; border:1px solid #d4d4d8; color:#71717a; border-radius:8px; width:27px; height:27px; font-size:12px; cursor:pointer; flex:none; display:flex; align-items:center; justify-content:center; transition:.15s; }
+  .gcard .foldbtn:hover { border-color:var(--red); color:var(--red); }
+  .gcard.folded .foldbtn { transform:rotate(-90deg); }
+  .gcard.folded .sub2 { margin-bottom:2px; }
+  .gcard .gbody { margin-top:0; }
+  .gcard.folded .gbody { display:none; }
   .pa-row { display:flex; gap:6px; margin-top:11px; }
   .pa-row input { flex:1; min-width:0; padding:7px 10px; border:1px solid #d4d4d8; border-radius:9px; font:inherit; font-size:13px; background:#fff; }
   .pasave { background:var(--ink); color:#fff; border:none; border-radius:9px; padding:7px 14px; font:inherit; font-weight:700; font-size:13px; cursor:pointer; }
@@ -183,7 +191,7 @@
 
 </section>
 <section id="tab-garage" data-tab="garage" style="display:none">
-  <div class="gintro"><b>🚗 Le garage.</b> Ajoute ici chaque voiture (mod&egrave;le, ann&eacute;e, kilom&eacute;trage) : la page calcule sa <b>valeur estim&eacute;e en CHF</b> d&rsquo;apr&egrave;s les ventes aux ench&egrave;res analys&eacute;es dans l&rsquo;onglet March&eacute; &mdash; m&eacute;diane du march&eacute; actuel, ajust&eacute;e du kilom&eacute;trage et de l&rsquo;ann&eacute;e. Le <b>prix d&rsquo;achat</b> (facultatif) affiche la plus ou moins-value en CHF et en % par rapport &agrave; cette valeur du march&eacute;. Les voitures restent enregistr&eacute;es sur cet appareil. <b>Important :</b> un iPhone finit par effacer les donn&eacute;es d&rsquo;un site peu visit&eacute; &mdash; pense &agrave; cliquer sur <b>&#128279; Sauvegarder mon garage</b> : le lien obtenu contient tes voitures et les restaure d&rsquo;un coup, sur n&rsquo;importe quel appareil.</div>
+  <div class="gintro"><b>🚗 Le garage.</b> Ajoute ici chaque voiture (mod&egrave;le, ann&eacute;e, kilom&eacute;trage) : la page calcule sa <b>valeur estim&eacute;e en CHF</b> d&rsquo;apr&egrave;s les ventes aux ench&egrave;res analys&eacute;es dans l&rsquo;onglet March&eacute; &mdash; m&eacute;diane du march&eacute; actuel, ajust&eacute;e du kilom&eacute;trage et de l&rsquo;ann&eacute;e. Le <b>prix d&rsquo;achat</b> (facultatif) affiche la plus ou moins-value en CHF et en % par rapport &agrave; cette valeur du march&eacute;. Clique sur une carte pour replier ses d&eacute;tails (la valeur estim&eacute;e reste visible). Les voitures restent enregistr&eacute;es sur cet appareil. <b>Important :</b> un iPhone finit par effacer les donn&eacute;es d&rsquo;un site peu visit&eacute; &mdash; pense &agrave; cliquer sur <b>&#128279; Sauvegarder mon garage</b> : le lien obtenu contient tes voitures et les restaure d&rsquo;un coup, sur n&rsquo;importe quel appareil.</div>
   <div class="gform">
     <div class="fld"><label>Mod&egrave;le</label><select id="g-model"></select></div>
     <div class="fld"><label>Ann&eacute;e</label><input id="g-year" type="number" min="1990" max="2027" value="2005" inputmode="numeric" /></div>
@@ -529,7 +537,7 @@ const gSave = a => { G_MEM = a; try { localStorage.setItem(GK, JSON.stringify(a)
 
 /* sauvegarde du garage dans le lien (fragment URL) — resiste a l'effacement du stockage par iOS */
 const gEnc = a => { try { return btoa(unescape(encodeURIComponent(JSON.stringify(a)))); } catch(e){ return ""; } };
-const gDec = s => { try { const a = JSON.parse(decodeURIComponent(escape(atob(String(s))))); if (!Array.isArray(a)) return []; return a.filter(c => c && VAL[c.m] && isFinite(+c.y) && isFinite(+c.km) && +c.km>0).map(c => { const id = String(c.id||"").replace(/[^A-Za-z0-9]/g,""); return { id: id || ("r"+Date.now().toString(36)+Math.random().toString(16).slice(2,5)), m: c.m, y: +c.y, km: +c.km, pa: (isFinite(+c.pa) && +c.pa>0 ? +c.pa : undefined) }; }); } catch(e){ return []; } };
+const gDec = s => { try { const a = JSON.parse(decodeURIComponent(escape(atob(String(s))))); if (!Array.isArray(a)) return []; return a.filter(c => c && VAL[c.m] && isFinite(+c.y) && isFinite(+c.km) && +c.km>0).map(c => { const id = String(c.id||"").replace(/[^A-Za-z0-9]/g,""); return { id: id || ("r"+Date.now().toString(36)+Math.random().toString(16).slice(2,5)), m: c.m, y: +c.y, km: +c.km, pa: (isFinite(+c.pa) && +c.pa>0 ? +c.pa : undefined), open: (c.open===0 ? 0 : 1) }; }); } catch(e){ return []; } };
 const gHash = () => { try { const m = location.hash.match(/g=([A-Za-z0-9+/=]+)/); return m ? m[1] : null; } catch(e){ return null; } };
 function gSyncHash(a){ try { history.replaceState(null, "", (a && a.length) ? location.pathname + "#g=" + gEnc(a) : location.pathname); } catch(e){} }
 const gSig = c => c.m + "|" + c.y + "|" + Math.round(c.km);
@@ -586,16 +594,20 @@ function renderGarage(){
     const p = (est/V.A*100 - 100);
     const small = V.nfit ? "" : (V.n<6 ? " \u00c9chantillon tr\u00e8s r\u00e9duit : estimation indicative." : "");
     const refNote = V.refOnly ? " Aucune Spider vendue en salle : estimation bas\u00e9e sur les rep\u00e8res du coup\u00e9." : "";
-    return `<div class="gcard">
+    return `<div class="gcard${c.open===0?" folded":""}">
       <button class="del" onclick="garageDel('${c.id}')" title="Retirer du garage">\u2715</button>
-      <h3>${mo.nom}</h3>
-      <div class="sub2">${c.y} &middot; ${fmtKm(c.km)}</div>
-      <div class="prix">${fmtCHF(est)}</div>
+      <div class="ghead" onclick="garageFold('${c.id}')" title="Replier / d\u00e9plier les d\u00e9tails">
+        <h3>${mo.nom}</h3>
+        <div class="sub2">${c.y} &middot; ${fmtKm(c.km)}</div>
+        <div class="pxrow"><div class="prix">${fmtCHF(est)}</div><button class="foldbtn" aria-label="Replier / d\u00e9plier les d\u00e9tails">&#9662;</button></div>
+      </div>
+      <div class="gbody">
       <div class="range">fourchette &asymp; ${fmtCHF(est*0.85)} &ndash; ${fmtCHF(est*1.15)}</div>
       ${c.pa ? `<div class="gain ${est*1000-c.pa>=0?"pos":"neg"}">${pctS2((est*1000/c.pa-1)*100)} &middot; ${signChf(est*1000-c.pa)} vs achat (${c.pa.toLocaleString("fr-CH")} CHF)</div>` : ""}
       <div class="vs">March&eacute; ${V.semLab} : m&eacute;diane ${fmtCHF(V.A)} &middot; cette auto : ${pctS(p)} vs m&eacute;diane &middot; base : ${V.n} vente${V.n>1?"s":""}</div>
       <div class="comm">${carComment(V, c.km)}${small}${refNote}</div>
       <div class="pa-row"><input id="pa-${c.id}" type="text" inputmode="numeric" placeholder="Prix d&rsquo;achat en CHF${c.pa?"":" — facultatif"}" value="${c.pa||""}" /><button class="pasave" onclick="garageSetPa('${c.id}')" title="Enregistrer le prix d&rsquo;achat">\u2713</button></div>
+      </div>
     </div>`;
   }).join("");
 }
@@ -617,6 +629,7 @@ function garageAdd(){
   const pEl = document.getElementById("g-pa"); if (pEl) pEl.value = "";
 }
 function garageDel(id){ gSave(gLoad().filter(c=>c.id!==id)); renderGarage(); }
+function garageFold(id){ const list = gLoad(); const c = list.find(x=>x.id===id); if (!c) return; c.open = (c.open===0 ? 1 : 0); gSave(list); renderGarage(); }
 function garageSetPa(id){
   const el = document.getElementById("pa-"+id);
   const raw = String(el ? el.value : "").replace(/[\u00a0\u202f ']/g,"").replace(",",".");

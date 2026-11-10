@@ -134,12 +134,13 @@
   <h1>Ferrari <span class="cav">&mdash; le march&eacute; en direct</span></h1>
   <div class="chips"><span class="chip">360 Challenge Stradale</span><span class="chip">430 Scuderia Spider 16M</span><span class="chip">458 Speciale Aperta</span><span class="chip">812 Competizione A</span><span class="chip">Monza SP2</span><span class="chip">Daytona SP3</span><span class="chip">12Cilindri Spider</span></div>
   <p class="meta"><b>P&eacute;riode :</b> toutes les ventes aux ench&egrave;res publiques recens&eacute;es du 1<sup>er</sup> janvier 2024 au 10 novembre 2026 (CLASSIC.COM, Bring a Trailer, Sports Car Market, pages officielles des maisons, presse sp&eacute;cialis&eacute;e), avec lieu de vente et prix.</p>
-  <p class="meta"><b>P&eacute;rim&egrave;tre :</b> les ventes aux &Eacute;tats-Unis sont exclues des graphiques, tableaux et estimations &mdash; le march&eacute; am&eacute;ricain, nettement plus tendu, fausse les moyennes. Les records am&eacute;ricains restent cit&eacute;s dans les commentaires de lecture. <a href="monde.html">Voir la version toutes ventes, USA comprises &rarr;</a></p>
+  <p class="meta"><b>P&eacute;rim&egrave;tre :</b> l&rsquo;onglet <b>March&eacute; hors USA</b> et les estimations du garage excluent les ventes am&eacute;ricaines &mdash; le march&eacute; US, nettement plus tendu, fausse les moyennes. L&rsquo;onglet <b>March&eacute; monde</b> affiche toutes les ventes, &Eacute;tats-Unis compris.</p>
   <p class="meta"><b>Monnaie :</b> tous les montants sont convertis en <b>francs suisses (CHF)</b> aux taux moyens de l&rsquo;ann&eacute;e de vente &mdash; 2024 : 1 $ = 0,88 &middot; 1 &euro; = 0,96 &middot; 1 £ = 1,13 &mdash; 2025 : 1 $ = 0,84 &middot; 1 &euro; = 0,94 &middot; 1 £ = 1,12 &mdash; 2026 : taux BNS du 6.11.2026 (1 $ = 0,8185 &middot; 1 &euro; = 0,9144 &middot; 1 £ = 1,0957). Le prix d&rsquo;origine figure dans chaque ligne.</p>
   <p class="meta"><b>M&eacute;thode :</b> r&eacute;sultats publi&eacute;s, prime acheteur incluse pour les maisons traditionnelles (RM Sotheby&rsquo;s, Mecum, Bonhams, Gooding, Broad Arrow, Artcurial&hellip;) ; BaT = ench&egrave;re gagnante hors frais acheteur (~5 %) ; Collecting Cars = prix final affich&eacute;.</p>
 </header>
 <nav id="tabs">
-  <button class="navtab active" data-tab="marche" onclick="showTab('marche')">📈 March&eacute;</button>
+  <button class="navtab active" data-tab="marche" onclick="showTab('marche')">📈 March&eacute; hors USA</button>
+  <button class="navtab" data-tab="marche-monde" onclick="showTab('marche-monde')">🌍 March&eacute; monde</button>
   <button class="navtab" data-tab="garage" onclick="showTab('garage')">🚗 Mon garage</button>
   <span class="maj">Mise &agrave; jour : 10/11/2026</span>
 </nav>
@@ -190,6 +191,12 @@
   </table></div>
   <p class="notes" style="margin-top:14px"><b>Limites :</b> échantillons faibles pour les modèles rares (0 à 4 ventes/an pour Monza SP2, Daytona SP3 et 812 Competizione A) ; l'état, le kilométrage et la spécification (Tailor Made, one-off, voiture livrée neuve) expliquent une grande partie des écarts — les médianes excluent les one-off pour refléter le marché de série ; les résultats « non officiels » de CLASSIC.COM peuvent différer des chiffres définitifs des maisons ; les ventes BaT s'entendent hors frais acheteur ; les conversions en CHF sont indicatives (taux moyens annuels, taux BNS courant pour 2026). La vente Collecting Cars de nov. 2025 (430 16M) figure deux fois dans les bases avec des dates/prix voisins (07/11, £407 903 / 21/11, &euro;436 430) : très probablement la même voiture — un seul point est retenu. La vente 458 Speciale Aperta de nov. 2024 ($1,05 M, BaT) n'est datée précisément que par la discussion Reddit qui la mentionne.</p>
 
+</section>
+<section id="tab-marche-monde" data-tab="marche-monde" style="display:none">
+  <div class="band" id="band-monde"></div>
+  <p class="legend" style="font-weight:600;color:#2563eb;margin:0 0 16px">&#127757; Toutes les ventes publiques du monde entier, &Eacute;tats-Unis compris &mdash; le march&eacute; am&eacute;ricain, plus tendu, tire les m&eacute;dianes vers le haut. Les estimations du garage restent, elles, calcul&eacute;es hors USA (onglet March&eacute; hors USA).</p>
+  <div id="models-monde"></div>
+  <p class="notes" style="margin-top:18px">Sources &amp; m&eacute;thode : identiques &agrave; l&rsquo;onglet &laquo; March&eacute; hors USA &raquo; (tableau en bas de cet onglet). M&ecirc;mes ventes recens&eacute;es, p&eacute;rim&egrave;tre d&rsquo;affichage &eacute;largi aux &Eacute;tats-Unis.</p>
 </section>
 <section id="tab-garage" data-tab="garage" style="display:none">
   <div id="garage-band"></div>
@@ -370,6 +377,7 @@ const displayData = mo => {
   if (!ventes.length && !refs.length) return { ventes: mo.ventes||[], refs: mo.ptsRef||[], usOnly: true };
   return { ventes, refs, usOnly: false };
 };
+const displayDataMonde = mo => ({ ventes: mo.ventes||[], refs: mo.ptsRef||[], usOnly: false });
 
 /* ---------- Rendu ---------- */
 const fmtDate = iso => { const [y,m,d] = iso.split("-"); return d+"/"+m+"/"+y; };
@@ -384,14 +392,27 @@ const bandData = [
  ["Daytona SP3","×2,7 en 10 mois","CHF 5,35 M (oct. 2025, 1re vente de série) → $17,8 M / £8,16 M / $18,5 M en 2026 ; one-off caritatif $26 M."],
  ["12Cilindri Spider","1re vente en salle : CHF 432,5 k","Genève, 08/11/2026 (172 km) ; coupé : CHF 398 750 ; annonces Spider ≈ CHF 520-665 k."]
 ];
-document.getElementById("band").innerHTML = bandData.map(b =>
- `<div class="card"><b>${b[0]}</b><span><b style="display:inline;color:#0c6b2f">${b[1]}</b> — ${b[2]}</span></div>`).join("");
+const bandDataMonde = [
+ ["360 Challenge Stradale","26 ventes · ×2,7 en 3 ans","Médiane ~CHF 232 k (2024) → ~CHF 634 k (2026). Record : $1,87 M (Mecum Kissimmee, janv. 2026)."],
+ ["430 16M","20 ventes · ×2 en 3 ans","Médiane ~CHF 390 k (2024) → ~CHF 730-810 k (2026). Record : $1,98 M (141 miles)."],
+ ["458 Speciale Aperta","12 ventes · record $3,08 M","Premier million $ fin 2024, médiane 2026 ~CHF 1,4-1,9 M. Le plus fort potentiel de la liste."],
+ ["812 Competizione A","6 ventes en 3 ans","Aucune vente en 2024, CHF 1,86 M (oct. 2025) puis CHF 1,55-3,97 M en 2026 (Genève : CHF 1,75 M)."],
+ ["Monza SP2","3 ventes en 3 ans","Aucune en 2024, $2,54 M (déc. 2025) puis record $4,955 M (Amelia Island, mars 2026) — +90 % en 3 mois."],
+ ["Daytona SP3","5 ventes · ×2,7 en 10 mois","CHF 5,35 M (oct. 2025) → médiane S2 2026 ~CHF 11,8 M ($17,8 M Monterey, £8,16 M Londres) ; one-off caritatif $26 M."],
+ ["12Cilindri Spider","1re vente en salle : CHF 432,5 k","Genève, 08/11/2026 (172 km) ; coupé : CHF 398 750 (Genève) et $536 k (BaT, déc. 2025) ; annonces ≈ CHF 520-665 k."]
+];
+const bandRender = (elId, data) => {
+  document.getElementById(elId).innerHTML = data.map(b =>
+   `<div class="card"><b>${b[0]}</b><span><b style="display:inline;color:#0c6b2f">${b[1]}</b> — ${b[2]}</span></div>`).join("");
+};
+bandRender("band", bandData);
+bandRender("band-monde", bandDataMonde);
 
 /* Graphique SVG */
 function chart(id, pts, cnt) {
   const MOB = (typeof window !== "undefined" && window.innerWidth) ? window.innerWidth < 640 : false;
   const W = MOB ? 620 : 760, H = MOB ? 400 : 320, L = MOB ? 66 : 82, R = MOB ? 16 : 26, T = MOB ? 32 : 28, B = MOB ? 56 : 48;
-  const el = document.getElementById("ch-"+id);
+  const el = document.getElementById(id);
   if (!pts.length) { el.innerHTML = "<p class='legend'>Pas de vente aux enchères publique pour ce modèle sur la période.</p>"; return; }
   const t0 = Date.parse("2024-01-01"), t1 = Date.parse("2026-12-31");
   const ev = pts.filter(p=>p.e!=null).map(p=>p.e);
@@ -454,13 +475,15 @@ function chart(id, pts, cnt) {
 }
 
 /* Sections */
-const cont = document.getElementById("models");
-cont.innerHTML = M.map(mo => { const d = displayData(mo); return `
- <section class="model" id="${mo.id}">
+function sectionHTML(mo, d, monde){
+  const sid = monde ? "m-"+mo.id : mo.id;
+  const cid = monde ? "chm-"+mo.id : "ch-"+mo.id;
+  return `
+ <section class="model" id="${sid}">
   <h2>${mo.nom} <span class="tag ${mo.up.startsWith("×")||mo.up.startsWith("+")?"up":""}">${mo.up}</span></h2>
   <p class="sub">${mo.serie}</p>
   <div class="lecture">${mo.lecture}</div>
-  <div class="chartwrap"><div id="ch-${mo.id}"></div></div>
+  <div class="chartwrap"><div id="${cid}"></div></div>
   ${d.usOnly ? `<p class="legend" style="font-weight:600;color:#b45309">&#9888;&#65039; Aucune vente hors USA pour ce mod&egrave;le : points et rep&egrave;res am&eacute;ricains affich&eacute;s &agrave; titre indicatif.</p>` : ""}
   <p class="legend"><span class="k" style="background:#d40000"></span> vente aux enchères &nbsp;&nbsp;<span class="k" style="background:#fff;border:2px solid #d97706"></span> non vendue (enchère max) &nbsp;&nbsp;<span style="color:#2563eb;font-weight:700">— —</span> médiane semestrielle (niveau du marché, hors one-offs) &nbsp;&nbsp;<span style="color:#b45309;font-weight:700">★</span> record du modèle${mo.id==="c12"?" &nbsp;&nbsp;· ● = 1<sup>re</sup> Spider vendue en salle ; autres points = repères <i>coupé</i>":""}</p>
   <p class="legend" style="margin-bottom:2px">La ligne rouge pointillée relie simplement les ventes dans l'ordre chronologique : chaque point est une <b>voiture différente</b> (kilométrage, état, spécification). La ligne bleue en pointillés longs = <b>médiane des ventes du semestre</b>, c'est-à-dire le niveau réel du marché, indépendamment des records. L'axe des prix est <b>calé sur chaque modèle</b> (échelle logarithmique) : une même hauteur verticale = une même évolution en pourcentage, donc les records n'écrasent plus le marché au bas du graphique.</p>
@@ -468,19 +491,28 @@ cont.innerHTML = M.map(mo => { const d = displayData(mo); return `
    ${d.ventes.map(v=>`<tr${v.rec?" class='record'":""}><td>${fmtDate(v.d)}</td><td>${v.l}</td><td>${v.m}</td><td><b>${v.p}</b>${v.n?`<br><span style="color:#8b8b93;font-size:11.5px">${v.n}</span>`:""}</td><td class="num">${v.e==null?"n.c.":S(v.e)}</td></tr>`).join("")}
   </table></div>` : ""}
   ${mo.non&&mo.non.length?`<div class="unsold"><b>Non vendues &amp; repères :</b> ${mo.non.join(" · ")}</div>`:""}
- </section>`; }).join("");
+ </section>`;
+}
+const cont = document.getElementById("models");
+cont.innerHTML = M.map(mo => sectionHTML(mo, displayData(mo), false)).join("");
+const contM = document.getElementById("models-monde");
+contM.innerHTML = M.map(mo => sectionHTML(mo, displayDataMonde(mo), true)).join("");
 
-M.forEach(mo => {
-  const d = displayData(mo);
-  const pts = d.ventes.filter(v=>v.e!=null).map(v=>({...v, sold:1}))
-    .concat(d.refs.map(v=>({...v})));
-  const nc = d.ventes.filter(v=>v.e==null).length;
-  let cnt;
-  if (!mo.ventes.length) cnt = pts.length + " point"+(pts.length>1?"s":"")+" indicateur (coupé)"+(d.usOnly?" — aucune vente hors USA, repères américains":"")+" — aucune Spider vendue en salle";
-  else if (mo.id==="c12") cnt = "1re vente d'une 12Cilindri Spider en salle (Gen\u00e8ve, nov. 2026) + rep\u00e8res du coup\u00e9";
-  else cnt = pts.length + " vente"+(pts.length>1?"s":"")+" tracée"+(pts.length>1?"s":"")+(nc?" · "+nc+" à prix non publié (tableau uniquement)":"");
-  chart(mo.id, pts, cnt);
-});
+function drawCharts(prefix, dFn){
+  M.forEach(mo => {
+    const d = dFn(mo);
+    const pts = d.ventes.filter(v=>v.e!=null).map(v=>({...v, sold:1}))
+      .concat(d.refs.map(v=>({...v})));
+    const nc = d.ventes.filter(v=>v.e==null).length;
+    let cnt;
+    if (!mo.ventes.length) cnt = pts.length + " point"+(pts.length>1?"s":"")+" indicateur (coupé)"+(d.usOnly?" — aucune vente hors USA, repères américains":"")+" — aucune Spider vendue en salle";
+    else if (mo.id==="c12") cnt = "1re vente d'une 12Cilindri Spider en salle (Gen\u00e8ve, nov. 2026) + rep\u00e8res du coup\u00e9";
+    else cnt = pts.length + " vente"+(pts.length>1?"s":"")+" tracée"+(pts.length>1?"s":"")+(nc?" · "+nc+" à prix non publié (tableau uniquement)":"");
+    chart(prefix+mo.id, pts, cnt);
+  });
+}
+drawCharts("ch-", displayData);
+drawCharts("chm-", displayDataMonde);
 /* ---------- Onglets ---------- */
 function showTab(t) {
   document.querySelectorAll("section[data-tab]").forEach(s => { s.style.display = (s.dataset.tab===t) ? "" : "none"; });

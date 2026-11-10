@@ -220,7 +220,7 @@
   <div id="garage-cards"></div>
   <details class="metho">
     <summary>Comment la valeur est-elle calcul&eacute;e ?</summary>
-    <p>Pour chaque mod&egrave;le, l&rsquo;estimation part de la <b>m&eacute;diane des ventes du dernier semestre couvert</b> (hors one-offs, comme le Daytona SP3 caritatif, <b>et hors ventes aux &Eacute;tats-Unis</b> &mdash; march&eacute; US nettement plus tendu, qui tire les moyennes vers le haut), c&rsquo;est-&agrave;-dire le niveau r&eacute;el du march&eacute; europ&eacute;en. Elle applique ensuite l&rsquo;<b>&eacute;lasticit&eacute; prix/kilom&eacute;trage</b> mesur&eacute;e sur les ventes suivies (r&eacute;gression log-log sur les ventes hors USA dont le kilom&eacute;trage est connu ; valeur type de &minus;0,12 &agrave; &minus;0,40 selon le mod&egrave;le si l&rsquo;&eacute;chantillon est trop petit), puis un <b>l&eacute;ger facteur d&rsquo;ann&eacute;e</b> (&minus;3 %/an, plafonn&eacute;) pour les mod&egrave;les r&eacute;cents uniquement &mdash; pour les s&eacute;ries limit&eacute;es anciennes, l&rsquo;ann&eacute;e ne p&egrave;se presque rien face au kilom&eacute;trage et &agrave; la sp&eacute;cification.</p>
+    <p>Pour chaque mod&egrave;le, l&rsquo;estimation part de la <b>m&eacute;diane des ventes du dernier semestre couvert</b> (hors one-offs, comme le Daytona SP3 caritatif, <b>et hors ventes aux &Eacute;tats-Unis</b> &mdash; march&eacute; US nettement plus tendu, qui tire les moyennes vers le haut), c&rsquo;est-&agrave;-dire le niveau r&eacute;el du march&eacute; europ&eacute;en. Elle applique ensuite l&rsquo;<b>&eacute;lasticit&eacute; prix/kilom&eacute;trage</b> mesur&eacute;e sur les ventes suivies (r&eacute;gression log-log sur les ventes hors USA dont le kilom&eacute;trage est connu ; valeur type de &minus;0,12 &agrave; &minus;0,40 selon le mod&egrave;le si l&rsquo;&eacute;chantillon est trop petit), puis un <b>l&eacute;ger facteur d&rsquo;ann&eacute;e</b> (&minus;3 %/an, plafonn&eacute;) pour les mod&egrave;les r&eacute;cents uniquement &mdash; pour les s&eacute;ries limit&eacute;es anciennes, l&rsquo;ann&eacute;e ne p&egrave;se presque rien face au kilom&eacute;trage et &agrave; la sp&eacute;cification. Chaque carte affiche en compl&eacute;ment une estimation <b>&laquo; march&eacute; monde, USA comprises &raquo;</b> &mdash; g&eacute;n&eacute;ralement plus &eacute;lev&eacute;e, car le march&eacute; am&eacute;ricain est nettement plus tendu.</p>
     <p>La fourchette affich&eacute;e (&plusmn;15 %) traduit la dispersion r&eacute;elle des ventes. Limites : &eacute;chantillons faibles pour les mod&egrave;les rares (Monza SP2, Daytona SP3, 812 Competizione A) ; &eacute;chantillon tr&egrave;s r&eacute;duit pour la 12Cilindri Spider (une seule vente en salle &agrave; ce jour, Gen&egrave;ve nov. 2026) ; une ench&egrave;re est une tendance de march&eacute;, <b>pas une expertise</b> &mdash; l&rsquo;&eacute;tat, l&rsquo;historique, la couleur et les options font varier le prix.</p>
   </details>
 </section>
@@ -540,11 +540,11 @@ function parseYr(t){
   const m = t.match(/(?:^|[,;(]\s*|\s)((?:19|20)\d{2})\b/);
   return m ? +m[1] : null;
 }
-function buildVal(mo){
+function buildVal(mo, monde){
   const refs = (mo.ptsRef||[]).map(v=>({e:v.e, xo:false, km:parseKm(v.n), yr:parseYr(v.n), d:v.d, ref:true}));
-  let base = (mo.ventes||[]).filter(v=>v.e!=null && !isUS(v)).map(v=>({e:v.e, xo:v.xo===1, km:parseKm(v.n), yr:parseYr(v.n), d:v.d}));
+  let base = (mo.ventes||[]).filter(v=>v.e!=null && (monde || !isUS(v))).map(v=>({e:v.e, xo:v.xo===1, km:parseKm(v.n), yr:parseYr(v.n), d:v.d}));
   let usOnly = false;
-  if (!base.length){ usOnly = true; base = (mo.ventes||[]).filter(v=>v.e!=null).map(v=>({e:v.e, xo:v.xo===1, km:parseKm(v.n), yr:parseYr(v.n), d:v.d})); }
+  if (!base.length && !monde){ usOnly = true; base = (mo.ventes||[]).filter(v=>v.e!=null).map(v=>({e:v.e, xo:v.xo===1, km:parseKm(v.n), yr:parseYr(v.n), d:v.d})); }
   const all = (base.length ? base : refs).filter(p=>!p.xo);
   const pts = all.filter(p=>p.km!=null);
   let b = DEF_B[mo.id]||-0.30, nfit = 0, r2 = 0;
@@ -581,6 +581,7 @@ function estimCar(V, km, yr, moId){
   return est * yf;
 }
 const VAL = {}; M.forEach(mo => { VAL[mo.id] = buildVal(mo); });
+const VALM = {}; M.forEach(mo => { VALM[mo.id] = buildVal(mo, true); }); /* march\u00e9 monde : USA comprises */
 
 /* stockage local (avec repli memoire si indisponible) */
 const GK = "garage-ferrari-v1";
@@ -640,12 +641,13 @@ function renderGarageBand(){
   if (!list.length){ el.innerHTML = ""; return; }
   const ests = list.map(c => ({ c, est: estimCar(VAL[c.m], c.km, c.y, c.m) }));
   const totEst = ests.reduce((s,x)=>s+x.est, 0);
+  const totEstM = list.reduce((s,c)=>s+estimCar(VALM[c.m], c.km, c.y, c.m), 0);
   const withPa = ests.filter(x=>x.c.pa);
   const inv = withPa.reduce((s,x)=>s+x.c.pa, 0);
   const estPa = withPa.reduce((s,x)=>s+x.est, 0);
   let g = "";
   g += `<div class="card"><b>&#128176; Investissement</b><span>${inv ? fmtCHF(inv/1000) + " &middot; " + withPa.length + " voiture" + (withPa.length>1?"s":"") + " avec prix d&rsquo;achat" : "Aucun prix d&rsquo;achat renseign\u00e9 pour l&rsquo;instant"}</span></div>`;
-  g += `<div class="card"><b>&#128202; Valeur estim\u00e9e du garage</b><span>${fmtCHF(totEst)} &middot; ${list.length} voiture${list.length>1?"s":""} (march\u00e9 hors USA)</span></div>`;
+  g += `<div class="card"><b>&#128202; Valeur estim\u00e9e du garage</b><span>${fmtCHF(totEst)} hors USA &middot; ${fmtCHF(totEstM)} USA comprises &middot; ${list.length} voiture${list.length>1?"s":""}</span></div>`;
   if (inv && estPa>0){
     const d = estPa*1000 - inv, pct = d/inv*100;
     g += `<div class="card"><b>&#128200; ${d>=0?"Plus-value":"Moins-value"}</b><span><b style="display:inline;color:${d>=0?"#0c6b2f":"#a30000"}">${pctS2(pct)} &middot; ${signChf(d)}</b> sur les voitures avec prix d&rsquo;achat</span></div>`;
@@ -663,8 +665,9 @@ function renderGarage(){
     return;
   }
   el.innerHTML = list.map(c => {
-    const mo = M.find(m=>m.id===c.m), V = VAL[c.m];
+    const mo = M.find(m=>m.id===c.m), V = VAL[c.m], Vm = VALM[c.m];
     const est = estimCar(V, c.km, c.y, c.m);
+    const estM = estimCar(Vm, c.km, c.y, c.m);
     const p = (est/V.A*100 - 100);
     const small = V.nfit ? "" : (V.n<6 ? " \u00c9chantillon tr\u00e8s r\u00e9duit : estimation indicative." : "");
     const refNote = V.refOnly ? " Aucune Spider vendue en salle : estimation bas\u00e9e sur les rep\u00e8res du coup\u00e9." : "";
@@ -679,6 +682,7 @@ function renderGarage(){
       <div class="range">fourchette &asymp; ${fmtCHF(est*0.85)} &ndash; ${fmtCHF(est*1.15)}</div>
       ${c.pa ? `<div class="gain ${est*1000-c.pa>=0?"pos":"neg"}">${pctS2((est*1000/c.pa-1)*100)} &middot; ${signChf(est*1000-c.pa)} vs achat (${c.pa.toLocaleString("fr-CH")} CHF)</div>` : ""}
       <div class="vs">March&eacute; ${V.semLab}${V.usOnly ? " (base am\u00e9ricaine)" : " hors USA"} : m&eacute;diane ${fmtCHF(V.A)} &middot; cette auto : ${pctS(p)} vs m&eacute;diane &middot; base : ${V.n} vente${V.n>1?"s":""}</div>
+      <div class="vs monde">March&eacute; ${Vm.semLab} monde, USA comprises : estimation <b>${fmtCHF(estM)}</b> &middot; m&eacute;diane ${fmtCHF(Vm.A)} &middot; base : ${Vm.n} vente${Vm.n>1?"s":""}</div>
       <div class="comm">${carComment(V, c.km)}${small}${refNote}${V.usOnly ? " Aucune vente hors USA pour ce mod\u00e8le : base am\u00e9ricaine, estimation indicative." : ""}</div>
       <div class="pa-row"><input id="pa-${c.id}" type="text" inputmode="numeric" placeholder="Prix d&rsquo;achat en CHF${c.pa?"":" — facultatif"}" value="${c.pa||""}" /><button class="pasave" onclick="garageSetPa('${c.id}')" title="Enregistrer le prix d&rsquo;achat">\u2713</button></div>
       </div>

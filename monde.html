@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#18181b" />
+<title>Veille enchères Ferrari — Marché &amp; Garage · toutes ventes, USA comprises</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2318181b'/%3E%3Cpath d='M18 46 L32 12 L46 46 M24 34 h16' stroke='%23d40000' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+<style>
+  :root { --red:#d40000; --ink:#18181b; --zinc:#52525b; --line:#e4e4e7; --bg:#f4f4f5; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color:var(--ink); background:var(--bg); -webkit-font-smoothing: antialiased; }
+  a { color:#a30000; }
+  header { background: radial-gradient(1000px 420px at 85% -12%, rgba(212,0,0,.38), transparent 62%), linear-gradient(160deg,#131316 0%,#1c1c21 55%,#260909 100%); color:#fff; padding:36px 30px 28px; position:relative; }
+  header::after { content:""; position:absolute; left:0; right:0; bottom:0; height:3px; background:linear-gradient(90deg,#d40000,#ff5a3c,#d40000); }
+  .kicker { font-size:11px; letter-spacing:.34em; font-weight:700; color:#ff8a80; text-transform:uppercase; margin:0 0 10px; }
+  header h1 { margin:0 0 6px; font-size:30px; letter-spacing:.2px; }
+  header h1 .cav { color:#ff5a3c; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0 4px; }
+  .chip { font-size:11px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.15); color:#ececef; padding:4px 11px; border-radius:20px; }
+  header .meta { font-size:12.5px; color:#c3c3ca; max-width:950px; line-height:1.6; margin:10px 0 0; }
+  header .meta b { color:#fff; }
+  #tabs { position:sticky; top:0; z-index:40; background:rgba(24,24,27,.97); backdrop-filter:blur(6px); display:flex; align-items:center; gap:8px; padding:10px 16px; box-shadow:0 2px 14px rgba(0,0,0,.28); }
+  .navtab { border:1px solid rgba(255,255,255,.16); background:transparent; color:#d4d4d8; font:inherit; font-size:13.5px; font-weight:600; padding:8px 18px; border-radius:24px; cursor:pointer; transition:.18s; }
+  .navtab:hover { color:#fff; border-color:rgba(255,255,255,.4); }
+  .navtab.active { background:var(--red); border-color:var(--red); color:#fff; }
+  #tabs .maj { margin-left:auto; font-size:11.5px; color:#8b8b93; white-space:nowrap; }
+  main { max-width:1060px; margin:0 auto; padding:24px 16px 54px; }
+  .band { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:12px; margin:6px 0 8px; }
+  .band .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:13px 15px; box-shadow:0 1px 3px rgba(0,0,0,.05); border-top:3px solid var(--red); }
+  .band .card b { display:block; font-size:13.5px; margin-bottom:5px; color:#18181b; }
+  .band .card span { font-size:12.5px; color:#3f3f46; line-height:1.5; }
+  section.model { background:#fff; border:1px solid var(--line); border-radius:14px; margin:20px 0; padding:22px 24px; box-shadow:0 1px 4px rgba(0,0,0,.05); }
+  section.model h2 { margin:0 0 2px; font-size:20px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  section.model h2 .tag { font-size:11px; font-weight:600; background:#fdeaea; color:#a30000; border:1px solid #f3c1c1; padding:3px 10px; border-radius:20px; white-space:nowrap; }
+  section.model h2 .tag.up { background:#eaf7ee; color:#0c6b2f; border-color:#bfe5cb; }
+  section.model .sub { color:#71717a; font-size:12.5px; margin:3px 0 10px; }
+  section.model .lecture { font-size:13.5px; background:#fafafa; border-left:3px solid var(--red); padding:10px 13px; border-radius:0 9px 9px 0; margin:10px 0 14px; line-height:1.55; }
+  table { border-collapse:collapse; width:100%; font-size:12.5px; margin-top:12px; background:#fff; }
+  th { text-align:left; background:var(--ink); color:#fff; padding:8px 10px; font-weight:600; }
+  th:first-child { border-radius:8px 0 0 0; } th:last-child { border-radius:0 8px 0 0; }
+  td { border-bottom:1px solid #ececee; padding:7px 10px; vertical-align:top; }
+  tr:nth-child(even) td { background:#fafafa; }
+  tr:hover td { background:#fdf5f5; }
+  td.num, th.num { text-align:right; white-space:nowrap; }
+  tr.record td { background:#fff7e6; }
+  .unsold { font-size:12px; color:var(--zinc); background:#f8f8f8; border:1px dashed #d4d4d8; border-radius:10px; padding:9px 13px; margin-top:12px; line-height:1.65; }
+  .unsold b { color:#b45309; }
+  .chartwrap { margin:8px 0 4px; }
+  .legend { font-size:11.5px; color:#71717a; margin:3px 0 0; line-height:1.55; }
+  .legend .k { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:4px; vertical-align:-1px; }
+  h2.synth { font-size:19px; margin:30px 0 6px; }
+  .notes { font-size:12px; color:var(--zinc); line-height:1.65; }
+  .src td a { color:#a30000; text-decoration:none; } .src td a:hover { text-decoration:underline; }
+  .gintro { background:#fff; border:1px solid var(--line); border-left:4px solid var(--red); border-radius:12px; padding:16px 20px; margin:4px 0 16px; font-size:14px; line-height:1.6; }
+  .gintro b { color:#a30000; }
+  .gform { background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:0 1px 3px rgba(0,0,0,.04); display:grid; grid-template-columns:1.9fr .9fr 1.05fr .65fr 1.15fr auto; gap:12px; align-items:end; }
+  .gform .fld label { font-size:10.5px; font-weight:700; color:var(--zinc); display:block; margin:0 0 5px; text-transform:uppercase; letter-spacing:.07em; }
+  .gform select, .gform input { width:100%; padding:10px 11px; border:1px solid #d4d4d8; border-radius:10px; font:inherit; font-size:14px; background:#fff; color:var(--ink); }
+  .gform select:focus, .gform input:focus { outline:2px solid #f3c1c1; border-color:var(--red); }
+  .btn { background:var(--red); color:#fff; border:none; border-radius:10px; padding:11px 22px; font:inherit; font-weight:700; font-size:14px; cursor:pointer; transition:.15s; }
+  .btn:hover { background:#b30000; }
+  .gempty { background:#fff; border:1px dashed #d4d4d8; border-radius:14px; padding:30px 20px; text-align:center; color:#8b8b93; font-size:13.5px; margin-top:16px; line-height:1.6; }
+  .gcards { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; margin-top:16px; }
+  .gcard { background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px 14px; box-shadow:0 1px 4px rgba(0,0,0,.05); position:relative; border-top:3px solid var(--red); }
+  .gcard h3 { margin:0; font-size:15.5px; padding-right:26px; }
+  .gcard .sub2 { color:#71717a; font-size:12.5px; margin:3px 0 10px; }
+  .gcard .prix { font-size:27px; font-weight:800; color:var(--red); letter-spacing:-.5px; }
+  .gcard .range { font-size:12.5px; color:var(--zinc); margin:2px 0 8px; }
+  .gcard .vs { font-size:12px; color:#71717a; background:#f4f4f5; border-radius:8px; padding:6px 9px; }
+  .gcard .comm { font-size:12.5px; background:#fafafa; border-left:3px solid var(--red); padding:8px 11px; border-radius:0 8px 8px 0; margin-top:10px; line-height:1.55; }
+  .gcard .del { position:absolute; top:10px; right:11px; background:none; border:none; color:#c8c8cd; font-size:17px; cursor:pointer; line-height:1; }
+  .gcard .del:hover { color:var(--red); }
+  .gcard .gain { font-size:13px; font-weight:700; border-radius:9px; padding:7px 11px; margin:2px 0 8px; line-height:1.5; }
+  .gcard .gain.pos { background:#eaf7ee; color:#0c6b2f; }
+  .gcard .gain.neg { background:#fdeaea; color:#a30000; }
+  .gcard .ghead { cursor:pointer; -webkit-user-select:none; user-select:none; }
+  .gcard .pxrow { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .gcard .foldbtn { background:none; border:1px solid #d4d4d8; color:#71717a; border-radius:8px; width:27px; height:27px; font-size:12px; cursor:pointer; flex:none; display:flex; align-items:center; justify-content:center; transition:.15s; }
+  .gcard .foldbtn:hover { border-color:var(--red); color:var(--red); }
+  .gcard.folded .foldbtn { transform:rotate(-90deg); }
+  .gcard.folded .sub2 { margin-bottom:2px; }
+  .gcard .gbody { margin-top:0; }
+  .gcard.folded .gbody { display:none; }
+  .pa-row { display:flex; gap:6px; margin-top:11px; }
+  .pa-row input { flex:1; min-width:0; padding:7px 10px; border:1px solid #d4d4d8; border-radius:9px; font:inherit; font-size:13px; background:#fff; }
+  .pasave { background:var(--ink); color:#fff; border:none; border-radius:9px; padding:7px 14px; font:inherit; font-weight:700; font-size:13px; cursor:pointer; }
+  .pasave:hover { background:#000; }
+  .gtool { display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 0; }
+  .btn.alt { background:#fff; color:var(--ink); border:1px solid #d4d4d8; padding:9px 16px; font-size:13px; }
+  .btn.alt:hover { border-color:var(--red); color:var(--red); }
+  #g-restore { background:#fff; border:1px dashed #d4d4d8; border-radius:12px; padding:14px 16px; margin-top:10px; }
+  #g-restore .fld label { font-size:10.5px; font-weight:700; color:var(--zinc); display:block; margin:0 0 5px; text-transform:uppercase; letter-spacing:.07em; }
+  #g-restore input { width:100%; padding:10px 11px; border:1px solid #d4d4d8; border-radius:10px; font:inherit; font-size:14px; background:#fff; color:var(--ink); }
+  .grow { display:flex; align-items:center; gap:12px; margin-top:10px; flex-wrap:wrap; }
+  #g-msg { font-size:12.5px; color:var(--red); font-weight:600; line-height:1.5; }
+  details.metho { background:#fff; border:1px dashed #d4d4d8; border-radius:12px; padding:12px 16px; margin-top:18px; font-size:12.5px; color:var(--zinc); line-height:1.65; }
+  details.metho summary { cursor:pointer; font-weight:600; color:var(--ink); }
+  footer { text-align:center; color:#a1a1aa; font-size:11.5px; padding:18px; background:#fff; border-top:1px solid var(--line); }
+  footer a { color:#a30000; }
+  .tscroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .tscroll table { min-width:620px; margin-top:12px; }
+  @media (max-width: 760px) {
+    header { padding:24px 16px 20px; } header h1 { font-size:21px; }
+    .kicker { letter-spacing:.22em; font-size:10px; }
+    .chip { font-size:10.5px; padding:3px 9px; }
+    header .meta { font-size:11.5px; line-height:1.55; }
+    #tabs { padding:8px 10px; gap:6px; }
+    .navtab { font-size:12.5px; padding:7px 13px; }
+    #tabs .maj { font-size:10px; }
+    main { padding:14px 10px 40px; }
+    section.model { padding:16px 14px; border-radius:12px; }
+    section.model h2 { font-size:17px; }
+    section.model .lecture { font-size:13px; }
+    .legend { font-size:12px; }
+    table { font-size:12px; }
+    .gform { grid-template-columns:1fr 1fr; padding:14px; gap:10px; }
+    .gform .fld:first-child { grid-column:1/-1; }
+    .gform select, .gform input { font-size:16px; }
+    .pa-row input { font-size:16px; }
+    #g-restore input { font-size:16px; }
+    .gtool { margin-top:10px; }
+    .btn { grid-column:1/-1; }
+    .gcard .prix { font-size:23px; }
+    .band { gap:8px; }
+    .band .card { padding:11px 12px; }
+  }
+  @media (max-width: 430px) { #tabs .maj { display:none; } }
+</style>
+</head>
+<body>
+<header>
+  <p class="kicker">Veille enchères &middot; 2024 &ndash; 2026</p>
+  <h1>Ferrari <span class="cav">&mdash; le march&eacute; en direct</span></h1>
+  <div class="chips"><span class="chip">360 Challenge Stradale</span><span class="chip">430 Scuderia Spider 16M</span><span class="chip">458 Speciale Aperta</span><span class="chip">812 Competizione A</span><span class="chip">Monza SP2</span><span class="chip">Daytona SP3</span><span class="chip">12Cilindri Spider</span></div>
+  <p class="meta"><b>P&eacute;riode :</b> toutes les ventes aux ench&egrave;res publiques recens&eacute;es du 1<sup>er</sup> janvier 2024 au 10 novembre 2026 (CLASSIC.COM, Bring a Trailer, Sports Car Market, pages officielles des maisons, presse sp&eacute;cialis&eacute;e), avec lieu de vente et prix.</p>
+  <p class="meta"><b>P&eacute;rim&egrave;tre :</b> toutes les ventes publiques du monde entier, &Eacute;tats-Unis compris &mdash; graphiques, tableaux, m&eacute;dianes et estimations du garage. <a href="index.html">Voir la version hors USA &rarr;</a></p>
+  <p class="meta"><b>Monnaie :</b> tous les montants sont convertis en <b>francs suisses (CHF)</b> aux taux moyens de l&rsquo;ann&eacute;e de vente &mdash; 2024 : 1 $ = 0,88 &middot; 1 &euro; = 0,96 &middot; 1 £ = 1,13 &mdash; 2025 : 1 $ = 0,84 &middot; 1 &euro; = 0,94 &middot; 1 £ = 1,12 &mdash; 2026 : taux BNS du 6.11.2026 (1 $ = 0,8185 &middot; 1 &euro; = 0,9144 &middot; 1 £ = 1,0957). Le prix d&rsquo;origine figure dans chaque ligne.</p>
+  <p class="meta"><b>M&eacute;thode :</b> r&eacute;sultats publi&eacute;s, prime acheteur incluse pour les maisons traditionnelles (RM Sotheby&rsquo;s, Mecum, Bonhams, Gooding, Broad Arrow, Artcurial&hellip;) ; BaT = ench&egrave;re gagnante hors frais acheteur (~5 %) ; Collecting Cars = prix final affich&eacute;.</p>
+</header>
+<nav id="tabs">
+  <button class="navtab active" data-tab="marche" onclick="showTab('marche')">📈 March&eacute;</button>
+  <button class="navtab" data-tab="garage" onclick="showTab('garage')">🚗 Mon garage</button>
+  <span class="maj">Mise &agrave; jour : 10/11/2026</span>
+</nav>
+<main>
+<section id="tab-marche" data-tab="marche">
+  <div class="band" id="band"></div>
+  <div id="models"></div>
+<h2 class="synth">Sources &amp; fiabilité</h2>
+  <div class="tscroll">
+  <table class="src">
+    <tr><th>Source</th><th>Crédibilité</th><th>Dernière mise à jour</th></tr>
+    <tr><td><a href="https://www.snb.ch/fr/the-snb/mandates-goals/statistics/statistics-pub/current_interest_exchange_rates">BNS — cours de change actuels (USD/EUR/GBP → CHF)</a></td><td>5/5</td><td>06.11.2026</td></tr>
+    <tr><td><a href="https://www.classic.com/m/ferrari/360/challenge-stradale/">CLASSIC.COM — marché 360 Challenge Stradale</a></td><td>5/5</td><td>continue (nov. 2026)</td></tr>
+    <tr><td><a href="https://www.classic.com/m/ferrari/f430/scuderia-spider-16m/">CLASSIC.COM — marché 430 Scuderia Spider 16M</a></td><td>5/5</td><td>continue (nov. 2026)</td></tr>
+    <tr><td><a href="https://www.classic.com/m/ferrari/458/speciale-a/">CLASSIC.COM — marché 458 Speciale A</a></td><td>5/5</td><td>continue (nov. 2026)</td></tr>
+    <tr><td><a href="https://www.classic.com/m/ferrari/812/competizione-a/">CLASSIC.COM — marché 812 Competizione A</a></td><td>5/5</td><td>continue (nov. 2026)</td></tr>
+    <tr><td><a href="https://www.classic.com/m/ferrari/monza-sp/">CLASSIC.COM — marché Monza SP1/SP2</a></td><td>5/5</td><td>continue (nov. 2026)</td></tr>
+    <tr><td><a href="https://www.classic.com/m/ferrari/daytona-sp3/">CLASSIC.COM — marché Daytona SP3</a></td><td>5/5</td><td>continue (nov. 2026)</td></tr>
+    <tr><td><a href="https://www.classic.com/m/ferrari/12cilindri/">CLASSIC.COM — marché 12Cilindri</a></td><td>5/5</td><td>continue (nov. 2026)</td></tr>
+    <tr><td><a href="https://rmsothebys.com/auctions/mo26/lots/v0003-2023-ferrari-daytona-sp3/">RM Sotheby's — lot SP3 Monterey 2026 ($17 825 000)</a></td><td>5/5</td><td>15/08/2026</td></tr>
+    <tr><td><a href="https://rmsothebys.com/auctions/id25/lots/r0019-2024-ferrari-daytona-sp3/">RM Sotheby's — lot SP3 « Tailored for Speed » Zurich 2025 (CHF 5 348 750)</a></td><td>5/5</td><td>11/10/2025</td></tr>
+    <tr><td><a href="https://rmsothebys.com/auctions/lf26/lots/r0013-2015-ferrari-458-speciale-aperta/">RM Sotheby's — lot 458 Speciale Aperta Londres 2026 (£1 861 250)</a></td><td>5/5</td><td>31/10/2026</td></tr>
+    <tr><td><a href="https://rmsothebys.com/auctions/zu26/lots/r0014-2023-ferrari-812-competizione-a/">RM Sotheby's — lot 812 Competizione A Zurich 2026 (CHF 1 850 000)</a></td><td>5/5</td><td>26/09/2026</td></tr>
+    <tr><td><a href="https://rmsothebys.com/auctions/id25/lots/r0029-2024-ferrari-812-competizione-a/">RM Sotheby's — lot 812 Competizione A Zurich 2025 (CHF 1 861 250)</a></td><td>5/5</td><td>11/10/2025</td></tr>
+    <tr><td><a href="https://rmsothebys.com/auctions/0225/lots/r0031-2015-ferrari-458-speciale-aperta/">RM Sotheby's — lot 458 Speciale Aperta Shift Online 2025 ($1 650 000)</a></td><td>5/5</td><td>04/06/2025</td></tr>
+    <tr><td><a href="https://rmsothebys.com/auctions/pa24/lots/r0047-2009-ferrari-scuderia-spider-16m/">RM Sotheby's — lot 16M Paris 2024 (&euro;421 250)</a></td><td>5/5</td><td>03/02/2024</td></tr>
+    <tr><td><a href="https://rmsothebys.com/auctions/mc24/lots/r0011-2004-ferrari-challenge-stradale/">RM Sotheby's — lot 360 CS Monaco 2024 (&euro;241 250)</a></td><td>5/5</td><td>11/05/2024</td></tr>
+    <tr><td><a href="https://rmsothebys.com/auctions/mo24/lots/r0141-2004-ferrari-challenge-stradale/">RM Sotheby's — lot 360 CS Monterey 2024 ($324 000)</a></td><td>5/5</td><td>17/08/2024</td></tr>
+    <tr><td><a href="https://www.octane-magazine.com/news/rm-sothebys-tailored-for-speed-sale-sets-chf-70-million-record-in-zurich/">Octane — vente « Tailored for Speed » Zurich 2025 (CHF 70 M)</a></td><td>4/5</td><td>21/10/2025</td></tr>
+    <tr><td><a href="https://www.mecum.com/lots/1158451/2009-ferrari-430-scuderia-spider-16m/">Mecum — lot S158 16M Kissimmee 2026 ($1 980 000)</a></td><td>5/5</td><td>17/01/2026</td></tr>
+    <tr><td><a href="https://www.goodingco.com/lot/2004-ferrari-360-challenge-stradale-1c/">Gooding Christie's — lot 6 360 CS Pebble Beach 2025 ($340 500)</a></td><td>5/5</td><td>15/08/2025</td></tr>
+    <tr><td><a href="https://www.ferrari.com/en-EN/articles/ferrari-daytona-sp3-auction">Ferrari.com — SP3 « Tailor Made » $26 M, Monterey 2025</a></td><td>5/5</td><td>18/08/2025</td></tr>
+    <tr><td><a href="https://www.sportscarmarket.com/profile/2021-ferrari-monza-sp1">Sports Car Market — Monza SP1, RM Zurich oct. 2025 (CHF 2 592 500)</a></td><td>5/5</td><td>10/12/2025</td></tr>
+    <tr><td><a href="https://finance.yahoo.com/markets/stocks/articles/ferrari-monza-sp2-value-nearly-174100448.html">Yahoo Finance — analyse Monza SP2 (Abou Dabi vs Amelia Island)</a></td><td>4/5</td><td>2026</td></tr>
+    <tr><td><a href="https://autos.yahoo.com/classic-and-collector/articles/ferrari-daytona-sp3-value-jumped-160000939.html">Yahoo Autos — SP3 : de $6,65 M à $17,8 M en dix mois</a></td><td>4/5</td><td>2026</td></tr>
+    <tr><td><a href="https://www.magnetomagazine.com/articles/rm-sothebys-london-2026-auction-ferrari-daytona-sp3/">Magneto — RM London 2026, Daytona SP3 £8,16 M</a></td><td>4/5</td><td>02/11/2026</td></tr>
+    <tr><td><a href="https://www.thesupercarblog.com/ferrari-daytona-sp3-sells-for-18-5-million-at-auction-in-las-vegas/">The Supercar Blog — SP3 « Tailor Made » $18,5 M, Las Vegas 2026</a></td><td>4/5</td><td>01/11/2026</td></tr>
+    <tr><td><a href="https://www.classic-car-auctions.info/usa/california/monterey/2026-rm-sothebys-monterey-sale-auction-results/">Classic Car Auctions — résultats RM Monterey 2026</a></td><td>4/5</td><td>18/08/2026</td></tr>
+    <tr><td><a href="https://sealed.rmsothebys.com/ps00/inventory/r6179-2021-ferrari-monza-sp2/">RM Sotheby's Sealed — Monza SP2 vendue (mars 2025, prix confidentiel)</a></td><td>4/5</td><td>03/2025</td></tr>
+    <tr><td><a href="https://www.galerie-automobile.com/actualites/2025/3/18/rm-sothebys-sealed-cette-superbe-ferrari-monza-sp2-est-vendue-">Galerie automobile — vente Monza SP2 RM Sealed, Rétromobile 2025</a></td><td>3/5</td><td>18/03/2025</td></tr>
+    <tr><td><a href="https://www.theclassicvaluer.com/vehicle-details/rm-sotheby-s-2024-06-12-ferrari-430-scuderia-spider-16m-3fb0f7">The Classic Valuer — 16M RM Sotheby's, 12/06/2024 (£331 250)</a></td><td>3/5</td><td>12/06/2024</td></tr>
+    <tr><td><a href="https://www.glenmarch.com/cars/results/quick/Ferrari/360_Challenge_Stradale?unsold=0&only_online=0">Glenmarch — résultats d'enchères 360 Challenge Stradale (dont Saint-Tropez 2024)</a></td><td>3/5</td><td>continue</td></tr>
+    <tr><td><a href="https://backlist.io/market/ferrari/360-challenge-stradale/">Backlist.io — historique 360 Challenge Stradale (BaT/PCARMARKET)</a></td><td>3/5</td><td>nov. 2026</td></tr>
+    <tr><td><a href="https://www.reddit.com/r/Ferrari/comments/1gfn0m3/the_458_speciale_a_is_a_1m_car/">Reddit r/Ferrari — vente 458 Speciale Aperta $1 050 000 (début nov. 2024)</a></td><td>2/5</td><td>11/2024</td></tr>
+    <tr><td><a href="https://www.broadarrowauctions.com/vehicles/am26_r0149/2004-ferrari-360-challenge-stradale">Broad Arrow — lot 121 Amelia Auction 2026</a></td><td>5/5</td><td>06/03/2026</td></tr>
+    <tr><td><a href="https://rmsothebys.com/media-center/press-releases/rm-sotheby-s-achieves-10-million-in-tegernsee-with-91-of-all-lots-sold/">RM Sotheby's — communiqué vente de Tegernsee 2026</a></td><td>5/5</td><td>04/07/2026</td></tr>
+    <tr><td><a href="https://bringatrailer.com/listing/2025-ferrari-12-cilindri/">Bring a Trailer — 12Cilindri (coupé) vendu $536 000 (12/2025)</a></td><td>5/5</td><td>19/12/2025</td></tr>
+  </table></div>
+  <p class="notes" style="margin-top:14px"><b>Limites :</b> échantillons faibles pour les modèles rares (0 à 4 ventes/an pour Monza SP2, Daytona SP3 et 812 Competizione A) ; l'état, le kilométrage et la spécification (Tailor Made, one-off, voiture livrée neuve) expliquent une grande partie des écarts — les médianes excluent les one-off pour refléter le marché de série ; les résultats « non officiels » de CLASSIC.COM peuvent différer des chiffres définitifs des maisons ; les ventes BaT s'entendent hors frais acheteur ; les conversions en CHF sont indicatives (taux moyens annuels, taux BNS courant pour 2026). La vente Collecting Cars de nov. 2025 (430 16M) figure deux fois dans les bases avec des dates/prix voisins (07/11, £407 903 / 21/11, &euro;436 430) : très probablement la même voiture — un seul point est retenu. La vente 458 Speciale Aperta de nov. 2024 ($1,05 M, BaT) n'est datée précisément que par la discussion Reddit qui la mentionne.</p>
+
+</section>
+<section id="tab-garage" data-tab="garage" style="display:none">
+  <div id="garage-band"></div>
+  <div class="gintro"><b>🚗 Le garage.</b> Ajoute ici chaque voiture (mod&egrave;le, ann&eacute;e, kilom&eacute;trage) : la page calcule sa <b>valeur estim&eacute;e en CHF</b> d&rsquo;apr&egrave;s les ventes aux ench&egrave;res analys&eacute;es dans l&rsquo;onglet March&eacute; &mdash; m&eacute;diane du march&eacute; actuel <b>mondial, ventes am&eacute;ricaines comprises</b>, ajust&eacute;e du kilom&eacute;trage et de l&rsquo;ann&eacute;e. Le garage est partag&eacute; avec la version hors USA (m&ecirc;mes voitures, estimation ici fond&eacute;e sur le march&eacute; mondial). Le <b>prix d&rsquo;achat</b> (facultatif) affiche la plus ou moins-value en CHF et en % par rapport &agrave; cette valeur du march&eacute;. Clique sur une carte pour replier ses d&eacute;tails (la valeur estim&eacute;e reste visible). Les voitures restent enregistr&eacute;es sur cet appareil. <b>Important :</b> un iPhone finit par effacer les donn&eacute;es d&rsquo;un site peu visit&eacute; &mdash; pense &agrave; cliquer sur <b>&#128279; Sauvegarder mon garage</b> : le lien obtenu contient tes voitures et les restaure d&rsquo;un coup, sur n&rsquo;importe quel appareil.</div>
+  <div class="gform">
+    <div class="fld"><label>Mod&egrave;le</label><select id="g-model"></select></div>
+    <div class="fld"><label>Ann&eacute;e</label><input id="g-year" type="number" min="1990" max="2027" value="2005" inputmode="numeric" /></div>
+    <div class="fld"><label>Kilom&eacute;trage</label><input id="g-km" type="text" inputmode="numeric" placeholder="ex. 24 000" /></div>
+    <div class="fld"><label>Unit&eacute;</label><select id="g-unit"><option value="km">km</option><option value="mi">miles</option></select></div>
+    <div class="fld"><label>Prix d&rsquo;achat (facultatif)</label><input id="g-pa" type="text" inputmode="numeric" placeholder="ex. 250 000" /></div>
+    <button class="btn" onclick="garageAdd()">+ Ajouter au garage</button>
+  </div>
+  <div class="gtool">
+    <button class="btn alt" onclick="garageShare()">&#128279; Sauvegarder mon garage</button>
+    <button class="btn alt" onclick="gRestoreToggle()">&#8617;&#65039; Restaurer une sauvegarde</button>
+  </div>
+  <div id="g-restore" style="display:none">
+    <div class="fld"><label>Lien ou code de sauvegarde</label><input id="g-code" type="text" placeholder="Colle ici le lien de sauvegarde re&ccedil;u ou copi&eacute;" /></div>
+    <div class="grow"><button class="btn" onclick="garageRestore()">Restaurer</button><span id="g-msg"></span></div>
+  </div>
+  <div id="garage-cards"></div>
+  <details class="metho">
+    <summary>Comment la valeur est-elle calcul&eacute;e ?</summary>
+    <p>Pour chaque mod&egrave;le, l&rsquo;estimation part de la <b>m&eacute;diane des ventes du dernier semestre couvert</b> (hors one-offs, comme le Daytona SP3 caritatif), toutes les ventes du monde entier &eacute;tant int&eacute;gr&eacute;es, &Eacute;tats-Unis compris &mdash; c&rsquo;est-&agrave;-dire le niveau du march&eacute; mondial, tir&eacute; vers le haut par les prix am&eacute;ricains. Elle applique ensuite l&rsquo;<b>&eacute;lasticit&eacute; prix/kilom&eacute;trage</b> mesur&eacute;e sur les ventes suivies (r&eacute;gression log-log sur les ventes dont le kilom&eacute;trage est connu ; valeur type de &minus;0,12 &agrave; &minus;0,40 selon le mod&egrave;le si l&rsquo;&eacute;chantillon est trop petit), puis un <b>l&eacute;ger facteur d&rsquo;ann&eacute;e</b> (&minus;3 %/an, plafonn&eacute;) pour les mod&egrave;les r&eacute;cents uniquement &mdash; pour les s&eacute;ries limit&eacute;es anciennes, l&rsquo;ann&eacute;e ne p&egrave;se presque rien face au kilom&eacute;trage et &agrave; la sp&eacute;cification.</p>
+    <p>La fourchette affich&eacute;e (&plusmn;15 %) traduit la dispersion r&eacute;elle des ventes. Limites : &eacute;chantillons faibles pour les mod&egrave;les rares (Monza SP2, Daytona SP3, 812 Competizione A) ; &eacute;chantillon tr&egrave;s r&eacute;duit pour la 12Cilindri Spider (une seule vente en salle &agrave; ce jour, Gen&egrave;ve nov. 2026) ; une ench&egrave;re est une tendance de march&eacute;, <b>pas une expertise</b> &mdash; l&rsquo;&eacute;tat, l&rsquo;historique, la couleur et les options font varier le prix.</p>
+  </details>
+</section>
+</main>
+<footer>Mise &agrave; jour : 10 novembre 2026 &middot; automatique les 1<sup>er</sup> et 15 de chaque mois &middot; veille g&eacute;n&eacute;r&eacute;e par <a href="https://github.com/corentinsurand-ai/veille-ferrari">Vibe</a></footer>
+<script>
+/* ---------- Données : prix d'origine + valeur indicative en CHF (milliers), conversions par année de vente ---------- */
+const M = [
+{
+ id:"360cs", nom:"360 Modena Challenge Stradale", serie:"2003-2005 · série limitée (~1 300 ex.)",
+ up:"×2,6 en 3 ans",
+ lecture:"Trois ans de hausse continue : médiane ~CHF 245 k en 2024, ~CHF 300 k fin 2025, puis ~CHF 634 k en 2026. Le déclic s'est fait en deux temps : l'été 2025 (BaT/Gooding) puis l'hiver 2025-2026. Le record mondial de $1,87 M (janv. 2026, Mecum Kissimmee, 375 mi, voiture repeinte) reste une exception ; les autos à gros kilométrage plafonnent sous CHF 400 k.",
+ ventes:[
+  {d:"2024-03-02", l:"En ligne — voiture dans l'Illinois, USA", m:"Bring a Trailer", p:"$290 000", e:255, n:"8 000 mi"},
+  {d:"2024-05-11", l:"Monaco", m:"RM Sotheby's — Monaco 2024, lot 121", p:"€241 250", e:232, n:"2004"},
+  {d:"2024-06-29", l:"Saint-Tropez (Gassin), France", m:"Artcurial", p:"€212 176", e:204, n:"2003"},
+  {d:"2024-08-17", l:"Monterey (CA), USA", m:"RM Sotheby's — Monterey 2024, lot 365", p:"$324 000", e:285, n:"6 900 mi"},
+  {d:"2025-02-28", l:"Miami (FL), USA", m:"RM Sotheby's — ModaMiami, lot 245", p:"vendue après vente, prix n.c.", e:null, n:"spécification rare, auto bleue"},
+  {d:"2025-05-27", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$235 000", e:197, n:"19 000 mi"},
+  {d:"2025-07-14", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$226 000", e:190, n:"16 000 mi"},
+  {d:"2025-08-15", l:"Pebble Beach (CA), USA", m:"Gooding Christie's, lot 6", p:"$340 500", e:286, n:"est. $300-400 k"},
+  {d:"2025-09-09", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$603 000", e:507, n:"4 500 mi ; $610 500 avec frais selon Hagerty"},
+  {d:"2025-10-11", l:"Zurich, Suisse", m:"RM Sotheby's — « Tailored for Speed », lot 126", p:"CHF 297 500", e:298, n:"≈ $370 900"},
+  {d:"2025-11-19", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$493 000", e:414, n:"conversion boîte manuelle"},
+  {d:"2026-01-17", l:"Kissimmee (FL), USA", m:"Mecum, lot S158", p:"$1 870 000", e:1531, rec:1, n:"375 mi — record mondial du modèle"},
+  {d:"2026-01-17", l:"Kissimmee (FL), USA", m:"Mecum", p:"$1 155 000", e:945, n:"327 mi"},
+  {d:"2026-01-30", l:"Paris, France (Rétromobile)", m:"Broad Arrow", p:"€561 000", e:513, n:"2003, 33 000 km"},
+  {d:"2026-01-30", l:"En ligne — voiture à Hong Kong", m:"Collecting Cars", p:"$262 000", e:214, n:"39 000 mi, RHD"},
+  {d:"2026-02-22", l:"En ligne — voiture au Royaume-Uni", m:"Collecting Cars", p:"£326 500", e:358, n:"2005, 9 000 mi"},
+  {d:"2026-02-27", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$971 000", e:795, n:"2 600 mi"},
+  {d:"2026-03-01", l:"En ligne — voiture au Royaume-Uni", m:"Collecting Cars", p:"£306 000", e:335, n:"15 000 mi"},
+  {d:"2026-03-06", l:"Amelia Island (FL), USA", m:"Broad Arrow, lot 121", p:"$775 000", e:634, n:"3 000 mi"},
+  {d:"2026-05-17", l:"Cernobbio / Villa Erba, Italie", m:"Broad Arrow — Villa d'Este, lot 233", p:"€720 625", e:659, n:"15 000 km"},
+  {d:"2026-05-20", l:"En ligne — voiture en Suisse", m:"Bring a Trailer", p:"$750 000", e:614, n:"9 000 km"},
+  {d:"2026-06-25", l:"En ligne — voiture à Chicago", m:"Bring a Trailer", p:"$775 000", e:634, n:"17 000 mi"},
+  {d:"2026-08-17", l:"En ligne — voiture en Californie", m:"Bring a Trailer", p:"$800 000", e:655, n:"11 000 mi"},
+  {d:"2026-09-27", l:"En ligne — voiture au Royaume-Uni", m:"Collecting Cars", p:"prix n.c.", e:null, n:"51 000 mi"},
+  {d:"2026-09-29", l:"En ligne — voiture en Californie", m:"Bring a Trailer", p:"$775 000", e:634, n:"20 000 mi ; sans réserve"},
+  {d:"2026-10-09", l:"Knokke-Heist (Zoute), Belgique", m:"Broad Arrow", p:"€535 000", e:489, n:"14 000 mi"}
+ ],
+ non:[ "06/12/2024 BaT — enchère max $282 000 (conversion 6 vitesses)", "15/01/2026 Mecum Kissimmee — enchère max $575 000", "20/03/2026 BaT — enchère max $825 000", "26/08/2026 BaT — enchère max $575 000",
+  "31/10/2026 RM Londres (est. €600-700 k, proposée ensuite à €540 k) et Broad Arrow Las Vegas — non vendues", "03/11/2026 BaT — enchère max $605 000",
+  "À venir : RM Sotheby's Abou Dabi (9 déc. 2026) — une 360 CS livrée en Suisse (32 000 km, est. $450-550 k) et une 16M à faible kilométrage" ]
+},
+{
+ id:"16m", nom:"F430 Scuderia Spider 16M", serie:"2008-2009 · 499 ex.",
+ up:"×2 en 3 ans",
+ lecture:"Le 16M a presque doublé : médiane ~CHF 390 k en 2024, ~CHF 690 k fin 2025, ~CHF 730-810 k en 2026, avec un record à $1,98 M pour l'exemplaire de la collection Bachman (141 miles, Mecum Kissimmee, janv. 2026). Le cap du million de dollars est désormais franchi ; les autos à gros kilométrage passent encore sous CHF 550 k.",
+ ventes:[
+  {d:"2024-02-03", l:"Paris, France (Rétromobile)", m:"RM Sotheby's — Paris 2024, lot 130", p:"€421 250", e:404},
+  {d:"2024-05-29", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$441 000", e:388, n:"3 200 mi"},
+  {d:"2024-06-12", l:"En ligne (Royaume-Uni)", m:"RM Sotheby's — vente en ligne UK", p:"£331 250", e:374, n:"faible kilométrage"},
+  {d:"2024-09-05", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$621 000", e:546, n:"352 mi"},
+  {d:"2025-08-01", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$825 000", e:693, n:"2 800 mi"},
+  {d:"2025-10-27", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$831 000", e:698, n:"3 800 mi"},
+  {d:"2025-11-07", l:"En ligne — voiture en Allemagne", m:"Collecting Cars", p:"£407 903", e:457, n:"18 691 km, Bianco Avus (une 2ᵉ base cite 21/11, €436 430)"},
+  {d:"2026-01-17", l:"Kissimmee (FL), USA", m:"Mecum, lot S158", p:"$1 980 000", e:1621, rec:1, n:"141 mi, ex-coll. Bachman — record mondial"},
+  {d:"2026-01-23", l:"Phoenix (AZ), USA", m:"RM Sotheby's — Arizona", p:"$907 000", e:742, n:"3 000 mi"},
+  {d:"2026-02-14", l:"Boca Raton (FL), USA", m:"RM Sotheby's", p:"$1 105 000", e:904, n:"5 000 mi"},
+  {d:"2026-03-07", l:"Amelia Island (FL), USA", m:"Broad Arrow", p:"$940 000", e:769, n:"6 000 mi"},
+  {d:"2026-05-28", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$1 050 000", e:859, n:"10 000 mi, sans réserve"},
+  {d:"2026-06-23", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$600 000", e:491, n:"7 000 mi"},
+  {d:"2026-07-03", l:"Le Mans, France (Le Mans Classic)", m:"Artcurial", p:"€539 976", e:494, n:"20 000 km"},
+  {d:"2026-07-04", l:"Tegernsee (Bavière), Allemagne", m:"RM Sotheby's — The Tegernsee Auction", p:"€651 875", e:596, n:"27 000 km"},
+  {d:"2026-08-14", l:"Monterey (CA), USA", m:"Mecum", p:"$1 001 000", e:819, n:"12 000 mi"},
+  {d:"2026-08-15", l:"En ligne — voiture en Californie", m:"Bring a Trailer", p:"$1 050 000", e:859, n:"11 000 mi"},
+  {d:"2026-08-25", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$916 000", e:750, n:"8 000 mi"},
+  {d:"2026-09-02", l:"En ligne — voiture dans l'État de New York", m:"Bring a Trailer", p:"$760 000", e:622, n:"12 000 mi"},
+  {d:"2026-10-31", l:"Londres, Royaume-Uni", m:"RM Sotheby's — The London Auction", p:"£668 750", e:733, n:"13 000 mi, RHD"}
+ ],
+ non:[ "31/10/2026 RM Londres — non vendue (12 000 km)" ]
+},
+{
+ id:"458sa", nom:"458 Speciale Aperta", serie:"2014-2015 · 499 ex.",
+ up:"×2 en 2 ans · record $3,08 M",
+ lecture:"Le modèle le plus dynamique de la liste. Après une première vente au-delà du million de dollars fin 2024 ($1,05 M sur BaT), l'Aperta s'est envolée : record $1,65 M en juin 2025, puis $3,08 M en janvier 2026 (58 miles). Médiane 2026 : ~CHF 1,4 M (S1) à ~CHF 1,9 M (S2), contre ~CHF 0,9 M fin 2024. Le kilométrage reste le premier facteur d'écart (de 99 km à 23 000 mi).",
+ ventes:[
+  {d:"2024-11-03", l:"En ligne — voiture aux USA", m:"Bring a Trailer", p:"$1 050 000", e:924, n:"première vente relevée au-delà du million ; date exacte à confirmer (début nov. 2024)"},
+  {d:"2025-06-04", l:"En ligne — Amérique du Nord", m:"RM Sotheby's — Shift Online, lot 142", p:"$1 650 000", e:1386, n:"record du modèle à l'époque"},
+  {d:"2025-12-05", l:"Abou Dabi, EAU", m:"RM Sotheby's", p:"$933 125", e:784, n:"11 000 mi, Blu Abu Dhabi"},
+  {d:"2025-12-07", l:"En ligne — voiture en Andorre", m:"Collecting Cars", p:"€780 000", e:733, n:"3 411 km, modifiée"},
+  {d:"2026-01-17", l:"Kissimmee (FL), USA", m:"Mecum", p:"$3 080 000", e:2521, rec:1, n:"58 mi — record mondial du modèle"},
+  {d:"2026-01-17", l:"Kissimmee (FL), USA", m:"Mecum", p:"$1 936 000", e:1584, n:"596 mi"},
+  {d:"2026-01-17", l:"Kissimmee (FL), USA", m:"Mecum", p:"$1 430 000", e:1170, n:"3 000 mi"},
+  {d:"2026-04-25", l:"Monaco", m:"RM Sotheby's — « Untouched Collection », lot 133", p:"€1 175 000", e:1074, n:"99 km"},
+  {d:"2026-07-22", l:"En ligne — voiture dans l'État de Washington", m:"Bring a Trailer", p:"$2 125 000", e:1739, n:"2 000 mi"},
+  {d:"2026-08-14", l:"Monterey (CA), USA", m:"Broad Arrow", p:"$2 425 000", e:1985, n:"175 mi"},
+  {d:"2026-10-31", l:"Las Vegas (NV), USA", m:"Broad Arrow", p:"$1 600 000", e:1310, n:"23 000 mi"},
+  {d:"2026-10-31", l:"Londres, Royaume-Uni", m:"RM Sotheby's — The London Auction, lot 132", p:"£1 861 250", e:2040, n:"1 000 mi"}
+ ],
+ non:[ "20/11/2025 BaT — enchère max $1 525 000", "17/01/2026 Mecum Kissimmee — enchère max $1 500 000", "07/04/2026 Collecting Cars (RHD modifiée)", "15/08/2026 Mecum Monterey — enchère max $2 400 000" ]
+},
+{
+ id:"compa", nom:"812 Competizione A (Aperta)", serie:"2021-2024 · 159 ex.",
+ up:"6 ventes · CHF 1,55-3,97 M",
+ lecture:"Aucune vente publique en 2024 (marché uniquement hors enchères), première relevée en octobre 2025 (CHF 1,86 M à Zurich), puis cinq ventes en 2026 entre CHF 1,55 M et CHF 3,97 M — dont CHF 1 748 750 pour une auto de 303 km à Genève (Gooding Christie's, 8 nov. 2026). La dispersion dépend surtout de la spécification : la pièce « Tailor Made » de Monterey a payé $4,845 M, tandis que la voiture de Monaco (modifiée) est restée sous CHF 1,6 M. Les enchères non abouties à $3,4-3,6 M (Mecum Monterey, sept. 2026) montrent des réserves élevées. Références coupé (série de 999) : €1,27 M (Munich, févr. 2025), $2,04 M (Monterey, août 2025) et CHF 1 326 875 (281 km, Genève, nov. 2026).",
+ ventes:[
+  {d:"2025-10-11", l:"Zurich, Suisse", m:"RM Sotheby's — « Tailored for Speed », lot 140", p:"CHF 1 861 250", e:1861, n:"2024, livrée neuve en Suisse ; première vente publique du modèle relevée"},
+  {d:"2026-02-27", l:"Miami (FL), USA", m:"RM Sotheby's, lot 128", p:"$2 645 000", e:2165, n:"2023, 95 mi ; MSRP $852 420"},
+  {d:"2026-04-25", l:"Monaco", m:"RM Sotheby's, lot 140", p:"€1 692 500", e:1548, n:"2024, 882 km, modifiée"},
+  {d:"2026-08-15", l:"Monterey (CA), USA", m:"RM Sotheby's, lot 18", p:"$4 845 000", e:3966, rec:1, n:"2024 « Tailor Made » — record mondial du modèle"},
+  {d:"2026-09-26", l:"Zurich, Suisse", m:"RM Sotheby's — The Zurich Auction, lot 115", p:"CHF 1 850 000", e:1850, n:"2023, 979 km"},
+  {d:"2026-11-08", l:"Genève, Suisse", m:"Gooding Christie's — The Geneva Auction, lot 11", p:"CHF 1 748 750", e:1749, n:"2023, 303 km, Grigio Ferro — 1re vente publique d'une Comp A en Suisse"}
+ ],
+ non:[ "2024 : aucune vente publique relevée", "18/11/2025 et 23/12/2025 Collecting Cars (RHD)", "23/02/2026 vente en ligne (Japon) — enchère max $1 790 000", "24/04/2026 Bonhams (Corse)", "14/08/2026 Mecum Monterey — enchère max $3 400 000", "26/09/2026 enchère max $3 600 000", "août 2025 : une Comp A annoncée à Monterey, résultat non publié" ]
+},
+{
+ id:"sp2", nom:"Monza SP2", serie:"2019-2022 · 499 ex. (SP1+SP2)",
+ up:"3 ventes · +90 % déc. 25 → mars 26",
+ lecture:"Presque aucune SP2 ne paraît en salle : aucune vente publique en 2024, une vente confidentielle chez RM Sotheby's Sealed (mars 2025, prix non publié), $2,54 M à Abou Dabi (déc. 2025, 505 mi) puis record mondial à $4,955 M (Amelia Island, mars 2026, 16 mi, un propriétaire) — soit +90 % en trois mois. Le marché visible ne suit pas encore : une SP2 non vendue à Villa d'Este (mai 2026), une enchère max $2,6 M sur SBX. Contexte SP1 (monoplace) : CHF 2 592 500 à Zurich (oct. 2025) et €2 480 000 à Paris (janv. 2026).",
+ ventes:[
+  {d:"2025-03-18", l:"Paris, France (Rétromobile) — vente scellée en ligne", m:"RM Sotheby's Sealed", p:"prix confidentiel", e:null, n:"2021, 2 800 km, Tailor Made hommage 250 TR"},
+  {d:"2025-12-05", l:"Abou Dabi, EAU", m:"RM Sotheby's, lot 409", p:"$2 536 250", e:2130, n:"2022, 505 mi (≈ £1,92 M)"},
+  {d:"2026-03-07", l:"Amelia Island (FL), USA", m:"Broad Arrow", p:"$4 955 000", e:4056, rec:1, n:"2021, 16 mi, un propriétaire — record mondial du modèle"}
+ ],
+ non:[ "2024 : aucune vente publique relevée", "20/04/2026 SBX Cars (en ligne) — enchère max $2 600 000", "17/05/2026 Broad Arrow, Villa d'Este (Cernobbio) — non vendue", "Référence SP1 : Zurich oct. 2025 CHF 2 592 500 ; Gooding Paris 29/01/2026 €2 480 000" ]
+},
+{
+ id:"sp3", nom:"Daytona SP3", serie:"2021-2024 · 599 ex. + one-off",
+ up:"×2,7 en 10 mois (autos de série)",
+ lecture:"Pas de vente publique en 2024 (livraisons en cours). Premier point de référence « série » : CHF 5 348 750 à Zurich (oct. 2025, 743 km) — soit ~$6,65 M. Puis le marché s'affole en 2026 : $17,8 M à Monterey (227 mi), £8,16 M (~CHF 8,9 M) à Londres pour l'ex-auto de presse Ferrari, et $18,5 M pour le second one-off « Tailor Made » à Las Vegas. Pour les autos de série, la valeur publique est passée de ~CHF 5,3 M à CHF 8,9-14,6 M en dix mois (+168 % selon les analyses du marché) — sans compter le one-off caritatif « 599+1 » vendu $26 M en août 2025, record pour une Ferrari neuve.",
+ ventes:[
+  {d:"2025-08-16", l:"Monterey (CA), USA", m:"RM Sotheby's — vente caritative Ferrari", p:"$26 000 000", e:21840, rec:1, xo:1, n:"2025 « Tailor Made » « 599+1 », one-off caritatif — voiture neuve la plus chère jamais vendue aux enchères"},
+  {d:"2025-10-11", l:"Zurich, Suisse", m:"RM Sotheby's — « Tailored for Speed »", p:"CHF 5 348 750", e:5349, n:"2024, 743 km — première vente publique d'une SP3 de série"},
+  {d:"2026-08-15", l:"Monterey (CA), USA", m:"RM Sotheby's, lot 223", p:"$17 825 000", e:14590, n:"2023, 227 mi ; est. $10-12 M dépassés de 78 %"},
+  {d:"2026-10-31", l:"Londres, Royaume-Uni", m:"RM Sotheby's — The London Auction", p:"£8 161 250", e:8942, n:"2022, 2 000 mi, ex-auto média Ferrari ; ≈ $10,9 M"},
+  {d:"2026-10-31", l:"Las Vegas (NV), USA", m:"Broad Arrow", p:"$18 540 000", e:15175, xo:1, n:"2025 « Tailor Made », one-off, 81 mi"}
+ ],
+ non:[ "2024 : aucune vente publique relevée (livraisons en cours)", "16/10/2026 — une SP1 (voiture d'exception adjointe) annoncée à Mecum Kissimmee janv. 2027" ]
+},
+{
+ id:"c12", nom:"12Cilindri Spider", serie:"2024-… · production en cours",
+ up:"1re vente en salle : CHF 432,5 k",
+ lecture:"La première 12Cilindri Spider jamais proposée en salle vient de passer la barre : CHF 432 500 à Genève (Gooding Christie's, 8 nov. 2026, 2025, 172 km, est. CHF 400-450 k) — vendue dans le bas de l'estimation, un premier point de référence réel pour le modèle. Le coupé s'échange plus bas qu'aux USA : CHF 398 750 (392 km, Genève, le même jour) contre $536 k vendu sur BaT en déc. 2025 (≈ CHF 450 k) et trois essais BaT non vendus en 2026 (enchères max $740/567/596 k) — les réserves restent au-dessus du marché américain. Annonces Spider ≈ €570-725 k (≈ CHF 520-665 k) ; une Spider s'est négociée ~£495 000 chez un broker britannique (≈ CHF 542 k). L'enchère genevoise devient la référence de calibrage des estimations.",
+ ventes:[
+  {d:"2026-11-08", l:"Genève, Suisse", m:"Gooding Christie's — The Geneva Auction, lot 12", p:"CHF 432 500", e:433, n:"2025, 172 km, Blu America — première vente en salle d'une 12Cilindri Spider"}
+ ],
+ ptsRef:[
+  {d:"2026-11-08", l:"Genève, Suisse", m:"Gooding Christie's (coupé)", p:"CHF 398 750", e:399, sold:1, n:"2025, 392 km"},
+  {d:"2025-12-19", l:"En ligne — coupé, USA", m:"Bring a Trailer (coupé)", p:"$536 000", e:450, sold:1, n:"seule vente d'un 12Cilindri aux enchères à ce jour (coupé)"},
+  {d:"2026-04-30", l:"En ligne — coupé, USA", m:"Bring a Trailer (coupé)", p:"enchère max $740 000", e:606, sold:0, n:"réserve non atteinte"},
+  {d:"2026-05-09", l:"En ligne — coupé, USA", m:"Bring a Trailer (coupé)", p:"enchère max $567 000", e:464, sold:0, n:"réserve non atteinte"},
+  {d:"2026-07-02", l:"En ligne — coupé, USA", m:"Bring a Trailer (coupé)", p:"enchère max $596 000", e:488, sold:0, n:"réserve non atteinte"}
+ ],
+ non:[ "08/11/2026 Genève : la 1re Spider en salle atteint CHF 432 500, dans le bas de l'estimation", "Marché visible en prix fixe (concessions/brokers) : ≈ €570 000-725 000, soit ≈ CHF 520-665 k", "Tom Hartley Jr (Royaume-Uni) — Spider 2025 vendue, ~£495 000 (≈ CHF 542 k)" ]
+}
+];
+
+/* page MONDE : toutes les ventes, USA comprises, affich\u00e9es et int\u00e9gr\u00e9es au calcul garage */
+const isUS = v => false; /* page monde : aucune exclusion, toutes les ventes sont affich\u00e9es */
+const displayData = mo => {
+  const ventes = (mo.ventes||[]).filter(v=>!isUS(v));
+  const refs = (mo.ptsRef||[]).filter(v=>!isUS(v));
+  if (!ventes.length && !refs.length) return { ventes: mo.ventes||[], refs: mo.ptsRef||[], usOnly: true };
+  return { ventes, refs, usOnly: false };
+};
+
+/* ---------- Rendu ---------- */
+const fmtDate = iso => { const [y,m,d] = iso.split("-"); return d+"/"+m+"/"+y; };
+const S = k => (k*1000).toLocaleString("fr-CH") + " CHF";
+
+const bandData = [
+ ["360 Challenge Stradale","×2,6 en 3 ans","Médiane ~CHF 245 k (2024) → ~CHF 634 k (2026). Record : $1,87 M (janv. 2026, Kissimmee)."],
+ ["430 16M","×2 en 3 ans","De ~CHF 390 k (2024) à ~CHF 730-810 k (2026). Le cap du million $ est franchi : record $1,98 M (141 miles)."],
+ ["458 Speciale Aperta","×2 en 2 ans · record $3,08 M","Premier million $ fin 2024, médiane 2026 ~CHF 1,4-1,9 M. Le plus fort potentiel de la liste."],
+ ["812 Competizione A","6 ventes en 3 ans","Aucune vente en 2024, CHF 1,86 M (oct. 2025) puis CHF 1,55-3,97 M en 2026 selon la spécification (Genève : CHF 1,75 M)."],
+ ["Monza SP2","3 ventes en 3 ans","Aucune en 2024, $2,54 M (déc. 2025) puis record $4,955 M (mars 2026, Amelia Island) — +90 % en 3 mois."],
+ ["Daytona SP3","×2,7 en 10 mois","CHF 5,35 M (oct. 2025, 1re vente de série) → $17,8 M / £8,16 M / $18,5 M en 2026 ; one-off caritatif $26 M."],
+ ["12Cilindri Spider","1re vente en salle : CHF 432,5 k","Genève, 08/11/2026 (172 km) ; coupé : CHF 398 750 ; annonces Spider ≈ CHF 520-665 k."]
+];
+document.getElementById("band").innerHTML = bandData.map(b =>
+ `<div class="card"><b>${b[0]}</b><span><b style="display:inline;color:#0c6b2f">${b[1]}</b> — ${b[2]}</span></div>`).join("");
+
+/* Graphique SVG */
+function chart(id, pts, cnt) {
+  const MOB = (typeof window !== "undefined" && window.innerWidth) ? window.innerWidth < 640 : false;
+  const W = MOB ? 620 : 760, H = MOB ? 400 : 320, L = MOB ? 66 : 82, R = MOB ? 16 : 26, T = MOB ? 32 : 28, B = MOB ? 56 : 48;
+  const el = document.getElementById("ch-"+id);
+  if (!pts.length) { el.innerHTML = "<p class='legend'>Pas de vente aux enchères publique pour ce modèle sur la période.</p>"; return; }
+  const t0 = Date.parse("2024-01-01"), t1 = Date.parse("2026-12-31");
+  const ev = pts.filter(p=>p.e!=null).map(p=>p.e);
+  const lo = Math.min(...ev), hi = Math.max(...ev);
+  const l0 = Math.log10(lo*0.82), l1 = Math.log10(hi*1.18);
+  const X = d => L + (Date.parse(d)-t0)/(t1-t0)*(W-L-R);
+  const Y = v => H-B - (Math.log10(v)-l0)/(l1-l0)*(H-T-B);
+  const nice = v => v>=1000 ? ((v/1000).toFixed(v>=10000?0:1).replace(".",",")+" M CHF") : String(v).replace(".",",")+" k CHF";
+  const inR = v => v >= Math.pow(10, l0-0.02) && v <= Math.pow(10, l1+0.02);
+  let ticks = [];
+  for (const mult of [[1,2,5],[1,1.5,2,3,5,7],[1,1.5,2,2.5,3,4,5,6,7,8,9]]) {
+    ticks = [];
+    for (let e=Math.floor(l0); e<=Math.ceil(l1); e++)
+      for (const m of mult) { const v = m*Math.pow(10,e); if (inR(v)) ticks.push(v); }
+    if (ticks.length >= 4) break;
+  }
+  let g = "";
+  ticks.forEach(v=>{ const y=Y(v);
+    g += `<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#e9e9ec"/><text x="${L-8}" y="${y+4}" text-anchor="end" font-size="11" fill="#8b8b93">${nice(v)}</text>`; });
+  g += `<text x="${L}" y="16" font-size="12.5" font-weight="700" fill="#d40000">●</text><text x="${L+16}" y="16" font-size="11.5" font-weight="600" fill="#52525b">${cnt}</text>`;
+  const q = [["2024-01-01","janv. 24"],["2024-04-01","avr. 24"],["2024-07-01","juil. 24"],["2024-10-01","oct. 24"],
+             ["2025-01-01","janv. 25"],["2025-04-01","avr. 25"],["2025-07-01","juil. 25"],["2025-10-01","oct. 25"],
+             ["2026-01-01","janv. 26"],["2026-04-01","avr. 26"],["2026-07-01","juil. 26"],["2026-10-01","oct. 26"]];
+  q.forEach(([d,lab])=>{ const x=X(d);
+    g += `<line x1="${x}" y1="${T-6}" x2="${x}" y2="${H-B}" stroke="#f0f0f2"/><text x="${x}" y="${H-B+22}" text-anchor="middle" font-size="9.5" fill="#8b8b93">${lab}</text>`; });
+  /* médiane semestrielle = niveau du marché (hors one-offs) */
+  const sems = [["2024-01-01","2024-06-30"],["2024-07-01","2024-12-31"],["2025-01-01","2025-06-30"],["2025-07-01","2025-12-31"],["2026-01-01","2026-06-30"],["2026-07-01","2026-12-31"]];
+  sems.forEach(([a,b])=>{
+    const vals = pts.filter(p=>p.sold!==0 && p.e!=null && p.xo!==1 && p.d>=a && p.d<=b).map(p=>p.e).sort((x,y)=>x-y);
+    if (!vals.length) return;
+    const med = vals.length%2 ? vals[(vals.length-1)/2] : (vals[vals.length/2-1]+vals[vals.length/2])/2;
+    const y = Y(med);
+    g += `<line x1="${X(a)}" y1="${y}" x2="${X(b)}" y2="${y}" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="7 5"/><text x="${X(a)+4}" y="${y-6}" font-size="10.5" font-weight="600" fill="#2563eb">médiane ${nice(med)} · ${vals.length} vente${vals.length>1?"s":""}</text>`;
+  });
+  /* fil temporel discret */
+  const solid = pts.filter(p=>p.sold!==0 && p.e!=null).sort((a,b)=>a.d.localeCompare(b.d));
+  let path = "";
+  solid.forEach((p,i)=>{ path += (i? " L":"M") + X(p.d).toFixed(1) + " " + Y(p.e).toFixed(1); });
+  if (solid.length>1) g += `<path d="${path}" fill="none" stroke="#d40000" stroke-width="1.4" stroke-dasharray="3 4" opacity="0.45"/>`;
+  /* placement des points : écartés verticalement s'ils se chevauchent (chaque vente reste visible) */
+  const P = new Map(); const placed = [];
+  pts.filter(p=>p.e!=null).forEach(p=>{
+    let x=X(p.d), y=Y(p.e), k=0;
+    while (placed.some(q=>Math.abs(q.x-x)<13 && Math.abs(q.y-y)<13)) { k++; y = Y(p.e) + (k%2?1:-1)*Math.ceil(k/2)*13; }
+    placed.push({x,y}); P.set(p,{x,y});
+  });
+  pts.filter(p=>p.e!=null).forEach(p=>{
+    const {x,y} = P.get(p); const sold=p.sold!==0;
+    const tip = `${fmtDate(p.d)} · ${p.m} · ${p.p}${p.n?" · "+p.n:""}${sold?"":" · NON VENDUE"}`;
+    g += sold
+      ? `<circle cx="${x}" cy="${y}" r="6.2" fill="#d40000" stroke="#fff" stroke-width="1.7"><title>${tip}</title></circle>`
+      : `<circle cx="${x}" cy="${y}" r="6.2" fill="#fff" stroke="#d97706" stroke-width="2.4"><title>${tip}</title></circle>`;
+    if (p.rec) g += `<text x="${x}" y="${y-12}" text-anchor="middle" font-size="13" fill="#b45309">★</text><text x="${x}" y="${y-24}" text-anchor="middle" font-size="10" font-weight="700" fill="#b45309">record</text>`;
+  });
+  if (solid.length){ const lp = solid[solid.length-1]; const {x, y} = P.get(lp);
+    const anchor = x>W-150 ? "end" : "start"; const dx = anchor==="start" ? 9 : -9;
+    g += `<text x="${x+dx}" y="${y+4}" text-anchor="${anchor}" font-size="10.5" font-weight="600" fill="#1a1a1a">${nice(lp.e)}</text>`; }
+  g += `<text x="${L}" y="${H-6}" font-size="10" fill="#8b8b93">Prix en CHF (indicatif) · échelle logarithmique : une même hauteur = une même évolution en % · chaque point = une voiture précise · survolez pour le détail</text>`;
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block" role="img">${g}</svg>`;
+}
+
+/* Sections */
+const cont = document.getElementById("models");
+cont.innerHTML = M.map(mo => { const d = displayData(mo); return `
+ <section class="model" id="${mo.id}">
+  <h2>${mo.nom} <span class="tag ${mo.up.startsWith("×")||mo.up.startsWith("+")?"up":""}">${mo.up}</span></h2>
+  <p class="sub">${mo.serie}</p>
+  <div class="lecture">${mo.lecture}</div>
+  <div class="chartwrap"><div id="ch-${mo.id}"></div></div>
+  ${d.usOnly ? `<p class="legend" style="font-weight:600;color:#b45309">&#9888;&#65039; Aucune vente hors USA pour ce mod&egrave;le : points et rep&egrave;res am&eacute;ricains affich&eacute;s &agrave; titre indicatif.</p>` : ""}
+  <p class="legend"><span class="k" style="background:#d40000"></span> vente aux enchères &nbsp;&nbsp;<span class="k" style="background:#fff;border:2px solid #d97706"></span> non vendue (enchère max) &nbsp;&nbsp;<span style="color:#2563eb;font-weight:700">— —</span> médiane semestrielle (niveau du marché, hors one-offs) &nbsp;&nbsp;<span style="color:#b45309;font-weight:700">★</span> record du modèle${mo.id==="c12"?" &nbsp;&nbsp;· ● = 1<sup>re</sup> Spider vendue en salle ; autres points = repères <i>coupé</i>":""}</p>
+  <p class="legend" style="margin-bottom:2px">La ligne rouge pointillée relie simplement les ventes dans l'ordre chronologique : chaque point est une <b>voiture différente</b> (kilométrage, état, spécification). La ligne bleue en pointillés longs = <b>médiane des ventes du semestre</b>, c'est-à-dire le niveau réel du marché, indépendamment des records. L'axe des prix est <b>calé sur chaque modèle</b> (échelle logarithmique) : une même hauteur verticale = une même évolution en pourcentage, donc les records n'écrasent plus le marché au bas du graphique.</p>
+  ${d.ventes.length ? `<div class="tscroll"><table><tr><th>Date</th><th>Lieu de la vente</th><th>Maison / vente</th><th>Prix</th><th class="num">≈ CHF</th></tr>
+   ${d.ventes.map(v=>`<tr${v.rec?" class='record'":""}><td>${fmtDate(v.d)}</td><td>${v.l}</td><td>${v.m}</td><td><b>${v.p}</b>${v.n?`<br><span style="color:#8b8b93;font-size:11.5px">${v.n}</span>`:""}</td><td class="num">${v.e==null?"n.c.":S(v.e)}</td></tr>`).join("")}
+  </table></div>` : ""}
+  ${mo.non&&mo.non.length?`<div class="unsold"><b>Non vendues &amp; repères :</b> ${mo.non.join(" · ")}</div>`:""}
+ </section>`; }).join("");
+
+M.forEach(mo => {
+  const d = displayData(mo);
+  const pts = d.ventes.filter(v=>v.e!=null).map(v=>({...v, sold:1}))
+    .concat(d.refs.map(v=>({...v})));
+  const nc = d.ventes.filter(v=>v.e==null).length;
+  let cnt;
+  if (!mo.ventes.length) cnt = pts.length + " point"+(pts.length>1?"s":"")+" indicateur (coupé)"+(d.usOnly?" — aucune vente hors USA, repères américains":"")+" — aucune Spider vendue en salle";
+  else if (mo.id==="c12") cnt = "1re vente d'une 12Cilindri Spider en salle (Gen\u00e8ve, nov. 2026) + rep\u00e8res du coup\u00e9";
+  else cnt = pts.length + " vente"+(pts.length>1?"s":"")+" tracée"+(pts.length>1?"s":"")+(nc?" · "+nc+" à prix non publié (tableau uniquement)":"");
+  chart(mo.id, pts, cnt);
+});
+/* ---------- Onglets ---------- */
+function showTab(t) {
+  document.querySelectorAll("section[data-tab]").forEach(s => { s.style.display = (s.dataset.tab===t) ? "" : "none"; });
+  document.querySelectorAll(".navtab").forEach(b => b.classList.toggle("active", b.dataset.tab===t));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ---------- Garage : valorisation d'apres le marche analyse ---------- */
+const SECS = [["2024-01-01","2024-06-30"],["2024-07-01","2024-12-31"],["2025-01-01","2025-06-30"],["2025-07-01","2025-12-31"],["2026-01-01","2026-06-30"],["2026-07-01","2026-12-31"]];
+const SEC_LABELS = ["S1 2024","S2 2024","S1 2025","S2 2025","S1 2026","S2 2026"];
+const DEF_B = { "360cs":-0.40, "16m":-0.30, "458sa":-0.35, "compa":-0.20, "sp2":-0.15, "sp3":-0.20, "c12":-0.12 };
+const MODERN = { "compa":1, "sp2":1, "sp3":1, "c12":1 };
+
+function med(a){ const v=[...a].sort((x,y)=>x-y); return v.length%2 ? v[(v.length-1)/2] : (v[v.length/2-1]+v[v.length/2])/2; }
+function parseKm(t){
+  if (!t) return null;
+  const m = t.match(/([\d\u00a0\u202f ']+(?:[.,]\d+)?)\s*(km|mi)\b/i);
+  if (!m) return null;
+  const n = parseFloat(m[1].replace(/[\u00a0\u202f ']/g,"").replace(",","."));
+  if (!isFinite(n) || n<=0) return null;
+  return /mi/i.test(m[2]) ? n*1.60934 : n;
+}
+function parseYr(t){
+  if (!t) return null;
+  const m = t.match(/(?:^|[,;(]\s*|\s)((?:19|20)\d{2})\b/);
+  return m ? +m[1] : null;
+}
+function buildVal(mo){
+  const refs = (mo.ptsRef||[]).map(v=>({e:v.e, xo:false, km:parseKm(v.n), yr:parseYr(v.n), d:v.d, ref:true}));
+  let base = (mo.ventes||[]).filter(v=>v.e!=null && !isUS(v)).map(v=>({e:v.e, xo:v.xo===1, km:parseKm(v.n), yr:parseYr(v.n), d:v.d}));
+  let usOnly = false;
+  if (!base.length){ usOnly = true; base = (mo.ventes||[]).filter(v=>v.e!=null).map(v=>({e:v.e, xo:v.xo===1, km:parseKm(v.n), yr:parseYr(v.n), d:v.d})); }
+  const all = (base.length ? base : refs).filter(p=>!p.xo);
+  const pts = all.filter(p=>p.km!=null);
+  let b = DEF_B[mo.id]||-0.30, nfit = 0, r2 = 0;
+  if (pts.length >= 5) {
+    const xs = pts.map(p=>Math.log(p.km)), ys = pts.map(p=>Math.log(p.e));
+    const mx = xs.reduce((s,v)=>s+v,0)/xs.length, my = ys.reduce((s,v)=>s+v,0)/ys.length;
+    let cov=0, vx=0;
+    for (let i=0;i<xs.length;i++){ cov += (xs[i]-mx)*(ys[i]-my); vx += (xs[i]-mx)**2; }
+    const bf = cov/vx, af = my-bf*mx;
+    let sse=0, sst=0;
+    for (let i=0;i<xs.length;i++){ sse += (ys[i]-(af+bf*xs[i]))**2; sst += (ys[i]-my)**2; }
+    r2 = sst ? 1-sse/sst : 0;
+    if (bf<0 && bf>-1.2 && r2>0.2){ b = bf; nfit = pts.length; }
+  }
+  let A=null, semLab="", kmRef=1000;
+  for (let i=SECS.length-1;i>=0;i--){
+    const inSem = all.filter(p=>p.d>=SECS[i][0] && p.d<=SECS[i][1]);
+    if (!inSem.length) continue;
+    A = med(inSem.map(p=>p.e)); semLab = SEC_LABELS[i];
+    const kk = inSem.filter(p=>p.km!=null).map(p=>p.km);
+    kmRef = kk.length ? med(kk) : (pts.length ? med(pts.map(p=>p.km)) : 1000);
+    break;
+  }
+  if (A==null){ A = all.length ? med(all.map(p=>p.e)) : 0; semLab = "marche"; kmRef = pts.length ? med(pts.map(p=>p.km)) : 1000; }
+  const yrs = all.map(p=>p.yr).filter(y=>y);
+  let modeYr = null;
+  if (yrs.length){ let best=null, bc=0; for (const y of [...new Set(yrs)]){ const c=yrs.filter(v=>v===y).length; if (c>bc){bc=c;best=y;} } modeYr = best; }
+  return { b, nfit, r2, A, semLab, kmRef, n: all.length, modeYr, refOnly: base.length===0 && !(mo.ventes||[]).length, usOnly };
+}
+function estimCar(V, km, yr, moId){
+  const est = V.A * Math.pow(km/V.kmRef, V.b);
+  let yf = 1;
+  if (MODERN[moId] && V.modeYr && yr) yf = Math.min(1.12, Math.max(0.86, Math.pow(0.97, V.modeYr-yr)));
+  return est * yf;
+}
+const VAL = {}; M.forEach(mo => { VAL[mo.id] = buildVal(mo); });
+
+/* stockage local (avec repli memoire si indisponible) */
+const GK = "garage-ferrari-v1";
+let G_MEM = null;
+const gLoad = () => { try { return JSON.parse(localStorage.getItem(GK)||"[]") || []; } catch(e){ return G_MEM || []; } };
+const gSave = a => { G_MEM = a; try { localStorage.setItem(GK, JSON.stringify(a)); } catch(e){} gSyncHash(a); };
+
+/* sauvegarde du garage dans le lien (fragment URL) — resiste a l'effacement du stockage par iOS */
+const gEnc = a => { try { return btoa(unescape(encodeURIComponent(JSON.stringify(a)))); } catch(e){ return ""; } };
+const gDec = s => { try { const a = JSON.parse(decodeURIComponent(escape(atob(String(s))))); if (!Array.isArray(a)) return []; return a.filter(c => c && VAL[c.m] && isFinite(+c.y) && isFinite(+c.km) && +c.km>0).map(c => { const id = String(c.id||"").replace(/[^A-Za-z0-9]/g,""); return { id: id || ("r"+Date.now().toString(36)+Math.random().toString(16).slice(2,5)), m: c.m, y: +c.y, km: +c.km, pa: (isFinite(+c.pa) && +c.pa>0 ? +c.pa : undefined), open: (c.open===0 ? 0 : 1) }; }); } catch(e){ return []; } };
+const gHash = () => { try { const m = location.hash.match(/g=([A-Za-z0-9+/=]+)/); return m ? m[1] : null; } catch(e){ return null; } };
+function gSyncHash(a){ try { history.replaceState(null, "", (a && a.length) ? location.pathname + "#g=" + gEnc(a) : location.pathname); } catch(e){} }
+const gSig = c => c.m + "|" + c.y + "|" + Math.round(c.km);
+function gMerge(loc, rem){ const out = [...loc]; const has = new Set(out.map(gSig)); for (const c of rem){ if (!has.has(gSig(c))){ out.push(c); has.add(gSig(c)); } } return out; }
+function gRestoreToggle(){ const el = document.getElementById("g-restore"); if (el){ el.style.display = (el.style.display==="none" ? "block" : "none"); const c = document.getElementById("g-code"); if (c && el.style.display!=="none") try { c.focus(); } catch(e){} } }
+function garageShare(){
+  const msg = document.getElementById("g-msg");
+  const say = t => { if (msg) msg.textContent = t; };
+  const a = gLoad();
+  if (!a.length){ say("Le garage est vide : ajoute une voiture avant de sauvegarder."); return; }
+  let url = ""; try { url = location.origin + location.pathname + "#g=" + gEnc(a); } catch(e){ say("Impossible de cr\u00e9er le lien ici."); return; }
+  if (typeof navigator !== "undefined" && navigator.share){ navigator.share({ title: "Mon garage Ferrari", url: url }).then(()=>say("Garde le lien partag\u00e9 (favori, note ou message) : il contient ton garage."), ()=>say("Partage annul\u00e9.")); }
+  else if (typeof navigator !== "undefined" && navigator.clipboard && navigator.clipboard.writeText){ const c = document.getElementById("g-code"); navigator.clipboard.writeText(url).then(()=>say("Lien copi\u00e9 \u2714 Garde-le (favori, note ou message) : il contient ton garage."), ()=>{ if (c) c.value = url; say("Copie le lien affich\u00e9 et garde-le pr\u00e9cieusement."); }); }
+  else { const c = document.getElementById("g-code"); if (c) c.value = url; say("Copie le lien affich\u00e9 et garde-le pr\u00e9cieusement."); }
+}
+function garageRestore(){
+  const msg = document.getElementById("g-msg");
+  const say = t => { if (msg) msg.textContent = t; };
+  const el = document.getElementById("g-code");
+  const raw = String(el ? el.value : "").trim();
+  let code = null;
+  const m1 = raw.match(/g=([A-Za-z0-9+/=]+)/); if (m1) code = m1[1];
+  if (!code){ const m2 = raw.match(/[A-Za-z0-9+/=]{20,}/); if (m2) code = m2[0]; }
+  const rem = code ? gDec(code) : [];
+  if (!rem.length){ say("Code non reconnu : colle le lien de sauvegarde complet."); return; }
+  gSave(gMerge(gLoad(), rem)); renderGarage();
+  say(rem.length + " voiture" + (rem.length>1 ? "s" : "") + " restaur\u00e9e" + (rem.length>1 ? "s" : "") + " \u2714");
+}
+
+const fmtKm = v => Math.round(v).toLocaleString("fr-CH") + " km";
+const fmtCHF = k => (Math.round(k)*1000).toLocaleString("fr-CH") + " CHF";
+const pctS = p => (p>=0? "+" : "\u2212") + Math.abs(Math.round(p)) + " %";
+const pctS2 = p => { const a = Math.abs(p); return (p>=0? "+" : "\u2212") + (a<10 ? a.toFixed(1).replace(".", ",") : String(Math.round(a))) + " %"; };
+const signChf = v => (v>=0? "+ " : "\u2212 ") + Math.abs(Math.round(v/1000)*1000).toLocaleString("fr-CH") + " CHF";
+
+function carComment(V, km){
+  const r = km/V.kmRef;
+  if (r<=0.4) return "Kilom\u00e9trage tr\u00e8s en dessous du march\u00e9 suivi : prime notable au-dessus de la m\u00e9diane.";
+  if (r<=0.8) return "Kilom\u00e9trage sous la moyenne du march\u00e9 : l\u00e9g\u00e8rement au-dessus de la m\u00e9diane.";
+  if (r<=1.3) return "Kilom\u00e9trage dans la norme du march\u00e9 suivi : proche de la m\u00e9diane.";
+  return "Kilom\u00e9trage sup\u00e9rieur au march\u00e9 suivi : d\u00e9cote par rapport \u00e0 la m\u00e9diane.";
+}
+
+function renderGarageBand(){
+  const el = document.getElementById("garage-band");
+  const list = gLoad();
+  if (!list.length){ el.innerHTML = ""; return; }
+  const ests = list.map(c => ({ c, est: estimCar(VAL[c.m], c.km, c.y, c.m) }));
+  const totEst = ests.reduce((s,x)=>s+x.est, 0);
+  const withPa = ests.filter(x=>x.c.pa);
+  const inv = withPa.reduce((s,x)=>s+x.c.pa, 0);
+  const estPa = withPa.reduce((s,x)=>s+x.est, 0);
+  let g = "";
+  g += `<div class="card"><b>&#128176; Investissement</b><span>${inv ? fmtCHF(inv/1000) + " &middot; " + withPa.length + " voiture" + (withPa.length>1?"s":"") + " avec prix d&rsquo;achat" : "Aucun prix d&rsquo;achat renseign\u00e9 pour l&rsquo;instant"}</span></div>`;
+  g += `<div class="card"><b>&#128202; Valeur estim\u00e9e du garage</b><span>${fmtCHF(totEst)} &middot; ${list.length} voiture${list.length>1?"s":""} (march\u00e9 mondial, USA comprises)</span></div>`;
+  if (inv && estPa>0){
+    const d = estPa*1000 - inv, pct = d/inv*100;
+    g += `<div class="card"><b>&#128200; ${d>=0?"Plus-value":"Moins-value"}</b><span><b style="display:inline;color:${d>=0?"#0c6b2f":"#a30000"}">${pctS2(pct)} &middot; ${signChf(d)}</b> sur les voitures avec prix d&rsquo;achat</span></div>`;
+  } else {
+    g += `<div class="card"><b>&#128200; Plus-value</b><span>Ajoute des prix d&rsquo;achat pour la calculer</span></div>`;
+  }
+  el.innerHTML = `<div class="band">${g}</div>`;
+}
+function renderGarage(){
+  renderGarageBand();
+  const list = gLoad();
+  const el = document.getElementById("garage-cards");
+  if (!list.length){
+    el.innerHTML = '<div class="gempty">Le garage est vide.<br>Ajoute la premi&egrave;re voiture avec le formulaire ci-dessus<br><span style="font-size:11.5px">(mod&egrave;le, ann&eacute;e, kilom&eacute;trage &mdash; la valeur estim&eacute;e s&rsquo;affiche instantan&eacute;ment)</span><br><span style="font-size:11.5px">D&eacute;j&agrave; un garage sauvegard&eacute; ? Utilise &laquo; &crarr;&#65039; Restaurer une sauvegarde &raquo; et colle ton lien</span></div>';
+    return;
+  }
+  el.innerHTML = list.map(c => {
+    const mo = M.find(m=>m.id===c.m), V = VAL[c.m];
+    const est = estimCar(V, c.km, c.y, c.m);
+    const p = (est/V.A*100 - 100);
+    const small = V.nfit ? "" : (V.n<6 ? " \u00c9chantillon tr\u00e8s r\u00e9duit : estimation indicative." : "");
+    const refNote = V.refOnly ? " Aucune Spider vendue en salle : estimation bas\u00e9e sur les rep\u00e8res du coup\u00e9." : "";
+    return `<div class="gcard${c.open===0?" folded":""}">
+      <button class="del" onclick="garageDel('${c.id}')" title="Retirer du garage">\u2715</button>
+      <div class="ghead" onclick="garageFold('${c.id}')" title="Replier / d\u00e9plier les d\u00e9tails">
+        <h3>${mo.nom}</h3>
+        <div class="sub2">${c.y} &middot; ${fmtKm(c.km)}</div>
+        <div class="pxrow"><div class="prix">${fmtCHF(est)}</div><button class="foldbtn" aria-label="Replier / d\u00e9plier les d\u00e9tails">&#9662;</button></div>
+      </div>
+      <div class="gbody">
+      <div class="range">fourchette &asymp; ${fmtCHF(est*0.85)} &ndash; ${fmtCHF(est*1.15)}</div>
+      ${c.pa ? `<div class="gain ${est*1000-c.pa>=0?"pos":"neg"}">${pctS2((est*1000/c.pa-1)*100)} &middot; ${signChf(est*1000-c.pa)} vs achat (${c.pa.toLocaleString("fr-CH")} CHF)</div>` : ""}
+      <div class="vs">March&eacute; ${V.semLab} (monde entier) : m&eacute;diane ${fmtCHF(V.A)} &middot; cette auto : ${pctS(p)} vs m&eacute;diane &middot; base : ${V.n} vente${V.n>1?"s":""}</div>
+      <div class="comm">${carComment(V, c.km)}${small}${refNote}</div>
+      <div class="pa-row"><input id="pa-${c.id}" type="text" inputmode="numeric" placeholder="Prix d&rsquo;achat en CHF${c.pa?"":" — facultatif"}" value="${c.pa||""}" /><button class="pasave" onclick="garageSetPa('${c.id}')" title="Enregistrer le prix d&rsquo;achat">\u2713</button></div>
+      </div>
+    </div>`;
+  }).join("");
+}
+function garageAdd(){
+  const mEl = document.getElementById("g-model");
+  const moId = mEl ? mEl.value : null;
+  const y = parseInt(document.getElementById("g-year").value, 10);
+  const k = parseFloat(String(document.getElementById("g-km").value).replace(/[\u00a0\u202f ']/g,"").replace(",","."));
+  const u = document.getElementById("g-unit").value;
+  if (!moId || !VAL[moId]) return;
+  if (!isFinite(y) || y<1990 || y>2027) return;
+  if (!isFinite(k) || k<=0) return;
+  const pa = parseFloat(String(document.getElementById("g-pa").value).replace(/[\u00a0\u202f ']/g,"").replace(",","."));
+  const km = (u==="mi") ? k*1.60934 : k;
+  const list = gLoad();
+  list.push({ id: Date.now().toString(36) + Math.random().toString(16).slice(2,5), m: moId, y, km, pa: (isFinite(pa) && pa>0 ? pa : undefined) });
+  gSave(list); renderGarage();
+  const kEl = document.getElementById("g-km"); if (kEl) kEl.value = "";
+  const pEl = document.getElementById("g-pa"); if (pEl) pEl.value = "";
+}
+function garageDel(id){ gSave(gLoad().filter(c=>c.id!==id)); renderGarage(); }
+function garageFold(id){ const list = gLoad(); const c = list.find(x=>x.id===id); if (!c) return; c.open = (c.open===0 ? 1 : 0); gSave(list); renderGarage(); }
+function garageSetPa(id){
+  const el = document.getElementById("pa-"+id);
+  const raw = String(el ? el.value : "").replace(/[\u00a0\u202f ']/g,"").replace(",",".");
+  const pa = parseFloat(raw);
+  const list = gLoad(); const c = list.find(x=>x.id===id);
+  if (!c) return;
+  c.pa = (isFinite(pa) && pa>0) ? pa : undefined;
+  gSave(list); renderGarage();
+}
+
+/* init */
+(function(){
+  const sel = document.getElementById("g-model");
+  if (sel) sel.innerHTML = M.map(mo=>`<option value="${mo.id}">${mo.nom}</option>`).join("");
+  const h = gHash();
+  if (h){ const rem = gDec(h); if (rem.length){ gSave(gMerge(gLoad(), rem)); } }
+  renderGarage();
+})();
+
+</script>
+</body>
+</html>
